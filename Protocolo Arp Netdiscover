@@ -1,0 +1,22 @@
+Existe un protocolo denominado ARP encargado de encontrar las direcciones de hardware (ethernet mac) de los equipos de dicha red, que correspondan a una determinada dirección IP.  
+Existe una herramienta que nos permite descubrir todos esos equipos de red, gracias al protocolo ARP. Se trata de netdiscover.  
+Comandos para netdiscover:
+
+netdiscover -i InterfazdeRed -r Rango IP/Mascara de Sub red
+
+El protocolo ARP, al ser de uso necesario, es el método más fiable para realizar búsquedas de equipos. No obstante, un barrido de paquetes ARP en todo el rango de la red puede ser un método agresivo y fácil de detectar por medidas de detección de intrusiones   
+
+Con el modo pasivo de netdiscover -p simplemente se estará escuchando el tráfico ARP.  
+
+el comando :
+arp -a
+Mostrara toda la informacion 
+
+El comando: 
+netdiscover -i eth0 -r 10.0.2.15
+Nos sirve para saber todas las direcciones Mac de las ip que estan conectadas a nuestra misma red
+Se puede usar paralelamente Wireshark para esnifar todo el trafico y ver todos los paquetes ARP que se estan enviando 
+
+El comando: 
+netdiscover -i eth0 -p 
+Hará lo mismo pero en modo pasivo 
