@@ -1,0 +1,5 @@
+Para ejecutar un nmap, sobre las direcciones ip que recolectamos con el script anterior y generamos el archivo iplist.txt, podemos usar el siguiente comando:
+
+for ip in $(cat iplist.txt); do nmap -p 80 -T4 $ip & done
+
+por cada ip en iplist.txt hacemos un nmap scaneo de puerto 80 a una velocidad de T4 a cada ip y terminamos. Con el simbolo & hacemos que sea mas rapido, que se ejecute todo de una vez 
