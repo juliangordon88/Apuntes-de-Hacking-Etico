@@ -1,0 +1,30 @@
+Medusa contiene algunas diferencias frente a Hydra, a la hora de trabajar con distintos servicios, que pueden igualar el funcionamiento de Hydra e incluso mejorarlo. Sin embargo, su funcionamiento es semejante. Además, Medusa también cuenta con su propio entorno gráfico al igual que Hydra.  
+
+-h Se usa para indicar a Medusa la dirección del objetivo, host.
+
+-u Se indicará a Medusa la información de login de un único usuario.
+
+-U Se indicará a Medusa la información de login de un fichero de texto para varios usuarios.
+
+-p Se indicará a Medusa la información de password de una sola contraseña.
+
+-P Se indicará a Medusa la información de password de un fichero de texto con varias contraseñas.
+
+-M Se indicará a Medusa el módulo con el que tiene que trabajar.
+
+-v Distintos tipos de “verbose” para mostrar más información. Van del nivel 1 al 8.
+
+-O Creará un fichero con el usuario y contraseña que diese un login correcto.
+
+-f Se detiene una vez ha encontrado la credencial correcta.
+
+Por ejemplo para comenzar el ataque se utilizaria este comando:
+medusa -v 6 -h 192.168.1.36 -u user -P /usr/share/wordlists/rockyou.txt -O /root/dict/medusa -M smbnt  
+
+si usamos medusa -d nos dirá los modulos que tenemos disponibles . Para seleccionarlos debemos escribirlos sin la extension (.mod ). Ejemplo:
+-M ftp 
+
+Una vez ya realizamos un nmap sobre nuestro objetivo y sabemos cuales son los puertos abiertos lanzaremos este comando para ver si podemos acceder al puerto FTP por ejemplo:
+
+medusa -h 10.0.2.15 -u anonymous -p anonymous -M ftp 
+ 
