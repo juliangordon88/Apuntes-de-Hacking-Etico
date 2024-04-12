@@ -1,0 +1,13 @@
+Ophcrack es un programa que utiliza tablas rainbow para descifrar contraseñas; para su ejecución solo deberemos escribir el comando:  
+ophcrack
+Con ello se abre un entorno gráfico:  
+
+Desde los botones superiores haremos uso de la herramienta… lo primero es instalar las correspondientes tablas rainbow.
+
+
+
+Para ello pulsamos sobre el botón tables:
+Iremos seleccionando la tabla que queramos instalar (más bien definir su directorio), para ello previamente nos las tendremos que haber descargado de su web.  
+https://ophcrack.sourceforge.io/tables.php
+Posteriormente con el botón load, cargaremos un hash o un fichero que contenga los hashes:  
+Ya solo nos quedará pulsar el botón crack y esperar.  
