@@ -1,0 +1,27 @@
+Sirve para que al realizar una conexión reversa a nuestra maquina, use un nombre de dominio en vez de un numero ip. Para ello debemos asociar un nombre de dominio a nuestra dirección ip (que suele ir cambiando con el tiempo). Esto se usa en el caso de que queramos ganar persistencia en nuestra maquina objetivo. Ya que si cambia nuestra ip, el nombre de dominio lo asocia automáticamente a nuestra nueva ip. 
+
+No-IP (noip.com) es un servicio que proporciona servicios de DNS dinámico. El servicio My.noip.com es una interfaz web proporcionada por No-IP para que los usuarios administren sus cuentas, dominios y configuraciones relacionadas con el DNS dinámico.
+
+Aquí hay una breve explicación de cómo funciona el servicio No-IP y cómo puede usarse a través de My.noip.com:
+
+DNS Dinámico:
+
+La mayoría de los proveedores de servicios de Internet (ISP) asignan direcciones IP dinámicas a sus usuarios, lo que significa que la dirección IP de un usuario puede cambiar periódicamente.
+No-IP utiliza DNS dinámico para superar este problema. Permite a los usuarios asociar un nombre de dominio con su dirección IP dinámica cambiante.
+Registro en No-IP:
+
+Para utilizar No-IP, los usuarios deben registrarse en el servicio a través de su sitio web, creando una cuenta.
+Selección de un Dominio:
+
+Después del registro, los usuarios pueden elegir un nombre de dominio gratuito proporcionado por No-IP o registrar uno propio.
+Instalación del Cliente No-IP:
+
+Los usuarios deben instalar un cliente No-IP en su dispositivo o en su enrutador. Este cliente monitorea cambios en la dirección IP y actualiza automáticamente la información de DNS en los servidores de No-IP cuando la dirección IP cambia.
+Gestión a través de My.noip.com:
+
+My.noip.com es la interfaz web donde los usuarios pueden administrar sus cuentas y dominios asociados.
+A través de My.noip.com, los usuarios pueden acceder a configuraciones como la renovación de dominios, la configuración de redireccionamientos, la gestión de registros DNS, entre otros.
+Uso para Acceso Remoto:
+
+No-IP es comúnmente utilizado por usuarios que desean acceder a sus dispositivos (como cámaras de seguridad, servidores domésticos, etc.) de forma remota a través de Internet, incluso cuando la dirección IP cambia.
+En resumen, My.noip.com proporciona a los usuarios una plataforma en línea donde pueden gestionar y controlar sus servicios de DNS dinámico ofrecidos por No-IP. Esto incluye la administración de dominios, configuraciones de redireccionamiento y otras opciones relacionadas con la gestión de DNS dinámico.
