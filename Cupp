@@ -1,0 +1,7 @@
+significa "Common User Passwords Profiler", es una herramienta de prueba de penetración diseñada para generar listas de contraseñas posibles basadas en información conocida sobre la persona o entidad objetivo. Es una herramienta bastante simple pero efectiva para realizar ataques de fuerza bruta.
+
+Cupp esta centrada en la información personal que le demos sobre una persona en concreto. 
+
+Para ejecutar la aplicación, al estar basada en Python tendremos que cambiar la sentencia habitual. En la carpeta creada de CuPP (cd/opt/cupp/) escribiremos python cupp.py –i  
+
+Nos irá preguntando información del target que queramos hacer el diccionario. Cuanta mas información contemos sobre la victima, mejor sera el diccionario 
