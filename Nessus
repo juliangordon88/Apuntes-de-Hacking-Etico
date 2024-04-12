@@ -1,0 +1,7 @@
+Nessus es un analizador de vulnerabilidades que va más allá de simplemente listar los puertos abiertos en una máquina objetivo. Incorpora una base de datos de vulnerabilidades y, al finalizar su análisis, presenta una lista de vulnerabilidades relacionadas con los servicios y el sistema operativo. Esto ahorra tiempo al automatizar la búsqueda de posibles vulnerabilidades en la máquina escaneada. Es una herramienta valiosa para identificar y abordar las debilidades de seguridad en sistemas y servicios.
+Se usa con interfaz grafica
+
+Para activar el servicio usamos el comando:
+sudo /bin/systemctl start nessusd.service
+
+Se puede usar como Post-explotación si completamos los campos con credenciales validas. 
