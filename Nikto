@@ -1,0 +1,35 @@
+Nikto, a diferencia de Nessus y Nmap, solo se usa para aplicaciones web. Se usa por linea de comandos y ya viene instalado en linux. 
+Comandos:
+
+Ejemplo de comando:
+nikto -Cgidirs all -mutate 12345 -Tuning x7 -host 10.0.2.4
+
+nikto -host http://10.0.2.4
+
+Cgidirs : permite indicar el directorio CGI que use la aplicacion web, pero si se indica el valor "all" la aplicacion buscara en todos los que incluye su diccionario.
+
+mutate : permite variar el patrón del funcionamieto de Nikto.
+1 Sirve para buscar todos los ficheros y directorios root.
+2 Para buscar los ficheros que contengan contraseñas
+3 para intentar listar los usuarios en Apache
+4 Intentará listar los usuarios mediante los directorios cgi. 
+5 Intenta listar todos los dubdominios del objetivo mediante fuerza bruta 
+6 Realiza la misma funcion pero mediante el diccionario que le indiquemos 
+
+Tuning : indica que el tipo de escaneo que realice Nikto realice las siguientes funciones que se le indiquen 
+1 Intenta encontrar ficheros que sean "interesantes" y "logs".
+2 Buscará usando patrones de "instalaciones por defecto" 
+3 Buscara informacion sensible que se pueda obtener mediante las paginas web que analiza que esten en su "" 
+4 Intentara hacer pruebas de inyeccion XSS
+5 intentara descargarse ficheros dentro como web root
+6 Intentará hacer un ataque de denegación de servicio.
+7 Intentará descargarse ficheros de todo el dominio.
+8 Intentará una ejecución remota de comandos mediante una terminal web.
+9 Intentará inyección SQL.
+0 Intentará subir un fichero al objetivo
+a Intentará saltarse la autenticación.
+b Intentará recopilar información del software que usa el servidor.
+c Intentará incluir código remoto en las peticiones.
+d Intentará averiguar el servicio web.
+e Intentará averiguar la URL de la consola administrativa del servicio web.
+x En cambio invierte la selección en el modo Tuning, por lo que si lo incluimos hará uso de todas las opciones excepto de las que pongamos a continuación. Por ejemplo, si quisiera cargar todos los módulos excepto el 7, tendría que poner Tuning x7.
