@@ -1,0 +1,19 @@
+Una vez tenemos instalado tor con el comando:
+apt install tor
+Para poder iniciar el servicio de tor debemos usar el siguiente comando: 
+service tor start
+Ahora debemos editar el fichero proxychains.conf . usamos el comando:
+nano /etc/proxychains4.conf 
+Y dentro activamos dynamic_chain y desactivamos strict_chain
+Por ultimo cambiamos la linea que dice socks4 y ponemos socks5
+Grabamos y cerramos 
+con el comando : netstat punta . verificamos el estado de la red Tor
+service tor status 
+Para que nuestra conexion salga, en vez de eth0 como habitualmente, a traves de los nodos de Tor, debemos usar proxychains. Con el comando:
+proxychains firefox . Verificamos que nuestra ip publica ya no es la misma (entramos a la pagina web www.cual-es-mi-ip.net)
+TOR no filtra nada UDP ni ICMP. Eso significa que el método de análisis para buscar puertos UDP abiertos, o para hacer ping al objetivo está prohibido si se quiere ocultar el origen de nuestra conexión.  
+
+Un ejemplo de un análisis de vulnerabilidades usando TOR sería el siguiente:
+sudo proxychains nmap -vv -d -sS -sV -Pn -p 1-65535 -O -f --mtu=16 --version-all --osscan-guess 213.144.50.76
+
+Pero como se ha explicado también, el rendimiento de la conexión será mucho peor, por lo tanto, se necesitará más tiempo para realizar el análisis de puertos con 
