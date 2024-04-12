@@ -1,0 +1,15 @@
+Ciertas aplicaciones no nos van a funcionar con Proxychains, y además no podemos enlazar el SOCKS5 de TOR en sus opciones, para ese tipo de problemas se hará uso de SOCAT, una aplicación que va a enlazar una dirección IP de nuestro objetivo a nuestro SOCKS5, así podremos hacer ataques de diccionario, analizar una página web, etc…  
+
+Supongamos que queremos auditar una página web mediante OWASP-ZAP, para ello lo primero que haríamos es arrancar el servicio TOR.  
+Pero, como sabemos, OWASP-ZAP no funciona mediante proxychains, así que lo que haremos será añadir un socket a nuestra dirección de red que corresponde a nuestra máquina (la ya conocida 127.0.0.1), en este caso supongamos que la dirección IP de la página web que queremos auditar «escondidos tras TOR» se trata de 88.88.88.88 y el puerto que utiliza es un HTTP sin conexión segura (el puerto 80).  
+
+socat TCP4-LISTEN:3333, fork SOCKS4a:127.0.0.1:88.88.88.88:80,sockport=9050
+De esta forma, ahora para auditar dicho sitio web lo único que tenemos que escribir en OWASP-ZAP como dirección de nuestro objetivo es 127.0.0.1:3333.  
+
+Al igual que podemos añadir un sitio web, podemos elegir otro tipo de puerto (y servicio) disponible de nuestro objetivo, para poder auditarlo mediante las redes TOR (por ejemplo, un ataque de diccionario SSH contra el puerto 22 si estuviera en funcionamiento). Para ello, lo único que tendríamos que hacer es atacar a 127.0.0.1 y el puerto indicado TCP4-LISTEN como el puerto del objetivo. Además de eso, también podemos auditar sitios web de la red TOR.  
+
+socat TCP4-LISTEN:6969,reuseaddr,fork SOCKS4A:127.0.0.1:ejemplo.onion:80,socksport=9050
+Con este comando habríamos relacionado en la dirección 127.0.0.1:6969 a la onion «ejemplo» y su puerto 80.
+
+Es importante saber que cada TCP4-LISTEN es un puerto de nuestra máquina, y si hemos usado anteriormente el 6969 (Por ejemplo), tendríamos que usar cualquier otro puerto que no fuera ese que está en uso (el 6970, por ejemplo).
+  
