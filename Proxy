@@ -1,0 +1,9 @@
+
+Un proxy es un intermediario que actúa entre tu dispositivo y el servidor al que estás accediendo. Funciona redirigiendo tus solicitudes a través de él antes de llegar al servidor final. Algunas funciones comunes de un proxy incluyen:
+
+• Ocultar la dirección IP: El proxy puede ocultar tu dirección IP real, lo que proporciona anonimato y privacidad.
+• Filtrar contenido: Puede bloquear o permitir ciertos tipos de contenido según la configuración.
+• Optimizar el rendimiento: Puede almacenar en caché recursos para acelerar futuras solicitudes.
+• Acceso a recursos restringidos: Puede permitir el acceso a recursos que podrían estar restringidos geográficamente.
+
+En resumen, un proxy sirve como intermediario entre tu dispositivo y el servidor final, realizando diversas funciones según la configuración y el propósito específico del proxy.
