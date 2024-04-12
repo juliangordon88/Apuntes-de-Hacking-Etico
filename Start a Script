@@ -1,0 +1,20 @@
+Para empezar a escribir un script, en este caso lo haremos con nano, debemos tener claro lo que vamos a ejecutar (puede ser python, o bash, etc)
+Para eso debemos escribir en la primer linea del script
+#!/bin/bash 
+
+Ejemplo: 
+#!/bin/bash 
+
+for ip in `seq 1 254`; do 
+ping -c 1 $1.$ip | grep "64 bytes" | cut -d " " -f 4 | tr -d ":" & done
+
+
+Este script, lo que hará será un ping de todos los ordenadores que esten en la red que le pasemos y nos devolverá solamente los numeros de ip que respondan a ping(esten activos)
+Para ejecutarlo, el usuario debe ejecutar este archivo nano y luego pasarle un numero de rango de ip que quiera hacer la busqueda, por ejemplo: 10.0.2 . 
+En el caso de que el usuario no ponga ningun numero de ip , se ejecutará pero sin ningun sentido. 
+Para eso podemos agregarle a nuestro script un If/else para ayudar al usuario a que escriba lo que corresponde. Por lo que agregaremos lo siguiente: 
+
+if [ "$1" ==  ""] 
+then
+echo "You forgot an Ip adress!"
+echo "Syntax: ./ipsweep.sh 192.168.1"
