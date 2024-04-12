@@ -1,0 +1,30 @@
+The harvester es una aplicación desarrollada en Python y que se usa para la recolección de información pública en internet (fuentes de información OSINT); para ello, realiza búsquedas a través de diferentes motores.
+
+Se utiliza en las primeras fases de una auditoría para obtener información sensible para la creación de vectores de ataque complejos.
+Ejemplo de comando: 
+
+theHarvester -d hackthissite.org -b all -v -t 
+
+
+Para agregar API keys a The Harvester y habilitar la búsqueda en Shodan u otros sitios, debemos agregar sus API keys
+
+
+Edita el archivo de configuración de The Harvester: El archivo de configuración de The Harvester se llama "theHarvester.conf". Este archivo contiene configuraciones específicas, incluidas las API keys. Encuéntralo en el directorio donde está instalado The Harvester o en el directorio donde clonaste el repositorio si estás utilizando la versión de GitHub.
+
+Abre el archivo de configuración: Usa un editor de texto como nano, vim o cualquier otro de tu preferencia para abrir el archivo "theHarvester.conf".
+
+Agrega tu API Key de Shodan: Busca la sección de configuración de Shodan en el archivo y encontrarás un campo para agregar la API Key. Debería verse algo así
+SHODAN_API_KEY = ""
+Reemplaza las comillas vacías con tu API Key de Shodan que obtuviste en el paso 1. Guarda los cambios y cierra el archivo de configuración.
+
+
+The Harvester reúne una serie de parámetros que es importante conocer antes de ejecutar. El más importante es -d, que se usa para indicar el dominio de nuestro objetivo.
+
+-b indica el motor de búsqueda a usar, se recomienda usar todos (all).
+-S obliga a comenzar con el número de resultado que se indique.
+-v indica que busque más host virtuales por si el servidor tuviese más aplicaciones web aparte de la indicada.
+-f guardará los resultados en formato html y xml.
+-n -c y -t hará pruebas más exhaustivas con el DNS.
+-e limitará la búsqueda al servidor DNS que le indiquemos.
+-l limitará el rango de resultados con el que trabajar.
+-s hará uso de la base de datos de Shodan.
