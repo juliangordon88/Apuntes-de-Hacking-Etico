@@ -1,0 +1,38 @@
+Airoplay-ng es una herramienta versátil que forma parte del conjunto Aircrack-ng y se utiliza para realizar una variedad de ataques en redes inalámbricas con el objetivo de evaluar su seguridad y realizar pruebas de penetración.
+
+Se utiliza principalmente para inyectar tráfico en redes inalámbricas y realizar ataques de desautenticación en redes Wi-Fi protegidas con WPA/WPA2.
+
+Desautenticación de clientes:
+Una de las principales funciones de airodump-ng es desautenticar a los clientes conectados a una red Wi-Fi. Esto se hace enviando paquetes de desautenticación a los clientes, lo que les obliga a desconectarse y, en muchos casos, a volver a conectarse automáticamente. Esto es útil en ataques de captura de handshake WPA, ya que permite capturar el intercambio de autenticación entre el cliente y el punto de acceso, que luego puede ser utilizado para romper la contraseña WPA.
+
+Ataque de reinyección:
+Airoplay-ng también puede utilizarse para inyectar tráfico en la red inalámbrica. Esto puede ser útil en ataques de reinyección de paquetes, donde el objetivo es capturar paquetes autenticados de la red y utilizarlos para realizar ataques de fuerza bruta o realizar otros tipos de análisis de seguridad.
+
+Ataques de ARP Spoofing:
+La herramienta también puede ser utilizada en ataques de ARP Spoofing (también conocidos como ataques de envenenamiento ARP). Esto implica falsificar la tabla ARP de la red para redirigir el tráfico entre dos hosts a través del atacante. Estos ataques pueden ser utilizados para interceptar el tráfico de red y realizar ataques de intermediario.
+
+Complemento de Aircrack-ng:
+Airoplay-ng trabaja en conjunto con otras herramientas del conjunto Aircrack-ng, como Aircrack-ng y Airodump-ng, para realizar pruebas de penetración en redes inalámbricas. Aircrack-ng se utiliza para descifrar claves WEP y WPA/WPA2, mientras que Airodump-ng se utiliza para capturar paquetes y recopilar información sobre las redes inalámbricas circundantes.
+
+Airodump-ng
+airodump-ng [interfaz]: Inicia el escaneo de redes inalámbricas en busca de puntos de acceso y clientes.
+
+airodump-ng --bssid [BSSID] --channel [canal] -w [archivo] [interfaz]: Captura paquetes de una red inalámbrica específica en un canal específico y los guarda en un archivo.
+
+airodump-ng --bssid [BSSID] -c [canal] -w [archivo] --write-interval [segundos] [interfaz]: Captura paquetes de una red inalámbrica específica en un canal específico y los guarda en un archivo, actualizando el archivo cada cierto intervalo de tiempo.
+
+airodump-ng --write [archivo] [interfaz]: Captura todos los paquetes de todas las redes encontradas y los guarda en un archivo.
+
+Aireplay-ng
+aireplay-ng --deauth [número] -a [BSSID] -c [cliente] [interfaz]: Envía paquetes de desautenticación a un cliente específico en una red específica.
+
+aireplay-ng --arpreplay -b [BSSID] -h [MAC_atacante] [interfaz]: Realiza un ataque de reinyección ARP.
+
+aireplay-ng --fakeauth [segundos] -e [ESSID] -a [BSSID] -h [MAC_atacante] [interfaz]: Realiza autenticaciones falsas con un punto de acceso específico.
+
+Aircrack-ng
+aircrack-ng -w [diccionario] [archivo.cap]: Intenta descifrar una clave WEP o WPA utilizando un diccionario de contraseñas.
+
+aircrack-ng -b [BSSID] -w [diccionario] [archivo.cap]: Intenta descifrar una clave WPA específica para una red específica utilizando un diccionario de contraseñas.
+
+
