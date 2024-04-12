@@ -1,0 +1,64 @@
+Ubicacion de los archivos en un gnu/linux, basicamente hay una estructura definida y casi todas las distribuciones la cumplen en mayor o menor medida.
+
+/boot
+En este directorio es donde va normalmente el kernel, opciones de compilacion del kernel, mapa de arranque etc..
+
+/etc/
+En este directorio se guarda practicamente toda la configuracion del sistema, desde archivos de configuracion de programas, hasta los archivos necesarios para que el sistema sepa como tiene que arrancar, que demonios correr etc..
+
+/dev
+Aqui se encuentran los dispositivos de el ordenador y algunos pseudo dispositivos, por ejemplo discos duros, tarjetas de sonido, tarjetas de captura etc; desde los descriptores que se encuentran en este directorio, se puede acceder a ellos como si se tratasen de simples archivos.
+
+/proc
+Desde aqui podremos tener acceso a informacion en tiempo real de el kernel e incluso cambiarle parametros al vuelo, sacar toda la informacion sobre cada dispositivo conectado al ordenador, desde la revision del chipset de la placa base, hasta el modelo de un escaner usb que tengamos conectado.
+
+/root
+El directorio home de el administrador del sistema con sus archivos, configuracion etc.
+
+/home
+Dentro de home deberia haber un subdirectorio con el nombre de cada uno de los usuarios(en sistemas con muchos usuarios el directorio de cada usuario suele ir dentro de un subdirectorio de home que tiene de nombre la primera letra que corresponda con el nombre del usuario), aqui se guardan las opciones de configuracion de los programas para cada usuario por separado.
+
+/sbin
+Es donde van los programas que son necesarios para el funcionamiento del sistema y que solo deberian ser ejecutados por el root.
+
+/bin
+Aqui van programas que son necesarios para el sistema pero que los puede ejecutar cualquier usuario.
+
+/lib
+Es donde van las librerias necesarias para el funcionamiento del sistema.
+
+/usr
+En este directorio van otros que a continuacion te detallo, y que esten relacionados con los usuarios, no especificamente con el sistema.
+
+/usr/sbin
+Aqui van los ejecutables para el administrador del sistema, pero de los que no depende el sistema para funcionar correctamente, por ejemplo un programa de configuracion como rcconf, que solo debe de poder ejecutar el root, pero no es necesario para el buen funcionamiento.
+
+/usr/bin
+Aqui irian los ejecutables de los que no depende el sistema para funcionar y tampoco son exclusivos del root, como por ejemplo el reproductor xmms etc..
+
+/usr/include
+En este directorio van las cabeceras necesarias para compilar cualquier porgrama con soporte de alguna de las librerias que tenemos instaladas en el sistema.
+
+/usr/lib
+Librerias no necesarias para el sistema, como por ejemplo un codec para el mplayer, o plugins para el gimp.
+
+/usr/src
+Codigo fuente de el kernel entre otros, normalmente se mete aqui el fuente de cualquier programa que queramos compilar, pero solo es algo estetico, no suele ser necesario para compilarlos.
+
+/usr/share
+aqui suele ir todos los archivos necesarios apra el funcionamiento de los programas, que no tengan cabida en los directorios anteriores, por ejemplo, los skins de un el xine, archivos de configuracion de ejemplo, temas para el gtk, kde etc, todo organizado dentro de su propio directorio.
+
+/usr/share/doc
+Toda la ayuda de los programas instaladosen el sistema, no incluida en el man, HOWTOS, ayuda en HTML, PS, etc.
+
+/usr/local
+en los subdirectorios de este, /etc, /bin, /sbin, /lib, /include, /share, etc.. se deberia meter todo lo que instale el propio usuario, todo aquello que quede fuera de el control de paquetes que utilice cada distribucion, por ejemplo si compilamos un programa del que nos hemos bajado las fuentes, el ejecutable de el programa deberia ir en /usr/local/bin, las librerias en /usr/local/lib etc..
+
+/var
+En este directorio y subdirectorios suelen ir todo aquello que varia a menudo de tamaño en el disco duro, como por ejemplo caches de paquetes o internet, logs, paginas web etc.
+
+/tmp
+Bueno, este no tiene mucho que explicar, aparte de que a diferencia de windows, en linux suele haber un cron que se encarga de eliminar automaticamente los archivos que ya no se necesiten.
+
+/mnt
+Aqui se suele poner, desde el cdrom, hasta una unidad de red, pasando por todo lo que se os ocurra, por ejemplo un iso montado con loop, hasta la clasica disquetera, esto no es demasiado estandard en algunos aspectos, por ejemplo, muchas distros crean el directorio /mnt, pero luego colocan el floppy y el cdrom en el raiz, yo prefiero tener todo lo montable en este directorio, nfs, floppy, cdrom, dvd, isos etc.
