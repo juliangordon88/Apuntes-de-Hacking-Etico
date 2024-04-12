@@ -1,0 +1,21 @@
+El escaneo o exploración de puertos es una actividad que consiste en el envío de paquetes de red a un equipo o host, con el objetivo de identificar el estado de los puertos TCP o UDP de una máquina. Un puerto en una máquina tiene varios estados, entre los cuales se puede distinguir: abierto, cerrado o filtrado.  
+Sus principales objetivos son:
+
+Detectar sistemas vivos corriendo o ejecutando procesos en una red.
+Descubrir qué puertos están abiertos o tienen programas/servicios en ejecución.
+Descubrir huellas de sistemas operativos, o lo que se conoce como OS FingerPrinting.
+Descubrimiento de direcciones IP en la red o sistema planteado como objetivo o blanco de ataque.
+Identificar banners.
+Arquitectura del sistema evaluado. 
+
+
+El protocolo UDP también cuenta con sus métodos para poder analizar los puertos que están en uso y, por lo tanto, abiertos. El análisis consiste en el simple envío de una cabecera sin datos. Y dependiendo del error que reciba dicha petición, se listará como abierto y/o filtrado, o cerrado. 
+
+TCP Xmas es una técnica de exploración de puertos que envía paquetes FIN, URG y PUSH al host objetivo y obtiene un paquete de Reset (RST) si el puerto está cerrado. Se recomienda utilizarlo en sistemas UNIX, LINUX y *.BSD, pero no en sistemas Microsoft debido a la confusión en la información devuelta. Por otro lado, TCP ACK busca puertos filtrados por un firewall y determina si un puerto está abierto si recibe una respuesta de Reset (RST) o si está siendo filtrado si no recibe respuesta.
+
+TCP Syn y TCP Connect pueden utilizarse en sistemas Windows y Linux, mientras que TCP Null y TCP Fin solo funcionan en máquinas Linux o Unix que cumplan con el estándar RFC. TCP Null envía una solicitud vacía cuando no se obtiene respuesta, indicando que el puerto está abierto o filtrado por un firewall. Si devuelve un mensaje de error, significa que está cerrado. TCP Fin, al igual que TCP Null, se usa en SO Linux o Unix y envía una solicitud con el valor "Fin de conexión". Si no hay respuesta, el puerto está abierto, pero si se produce un error, está filtrado o cerrado.
+
+TCP Syn es similar a TCP Connect en el escaneo de puertos, pero en lugar de establecer una conexión completa, aborta la conexión después de recibir una respuesta, lo que evita algunas medidas de seguridad. Es como llamar a una puerta abierta en lugar de entrar, y luego colgar cuando alguien responde.
+
+TCP Connect es el método más antiguo y seguro para determinar si un puerto está abierto o cerrado. Intenta establecer una conexión completa con el puerto objetivo y si tiene éxito, el puerto está abierto (ACK CONNECT). Si falla, el puerto está cerrado o filtrado por un firewall. Aunque es seguro, no es silencioso, ya que se conecta directamente al puerto objetivo, lo que puede ser comparado con entrar a una casa sin permiso.
+
