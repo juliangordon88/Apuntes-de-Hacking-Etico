@@ -1,0 +1,8 @@
+Su principal función es capturar y mostrar los datos que se transmiten a través de una red, lo que permite a los administradores de red y a los investigadores de seguridad examinar el tráfico en busca de problemas de rendimiento, anomalías o posibles ataques.
+El funcionamiento básico de Wireshark implica la captura de paquetes de datos que se transmiten a través de una red. Estos paquetes pueden contener información sobre el origen y el destino de la comunicación, así como el tipo de protocolo utilizado (por ejemplo, TCP, UDP, HTTP, etc.). Una vez capturados, Wireshark organiza y muestra estos paquetes en una interfaz gráfica fácil de usar, lo que permite a los usuarios examinar el tráfico de red en tiempo real o analizar capturas previas para diagnosticar problemas o investigar incidentes de seguridad. Además, Wireshark proporciona herramientas avanzadas de filtrado y análisis que permiten a los usuarios profundizar en los detalles del tráfico de red y extraer información útil para resolver problemas o investigaciones.
+
+Ejemplos de comandos para filtrar resultados:
+
+tcp.srcport == 80 (ejemplo puerto http) para filtrar por el puerto origen
+tcp.dstport == 21 (ejemplo puerto ftp) para filtrar por el puerto destino 
+ip.addr == 10.0.2.11 para filtrar por direccion de destino 
