@@ -1,0 +1,91 @@
+nmap hace un analisis de puertos de los 10000 puertos  mas importantes 
+-sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans 
+
+Ejemplo de comando para localizar que maquinas estan activas en nuestra red:
+nmap -e eth0 -sn 10.0.2.0/24
+
+
+Ejemplo de comando: 
+nmap -e -eth0 -sS 10.0.2.4 
+Esto seria un analisis de puerto muy sencillo con el protocolo tcp Syn (sS)
+
+Ejemplo de comando:
+nmap -vv -dd -sS -sV -Pn -O -f -mtu=16 --version-all --osscan-guess 192.168.1.37
+
+nmap -sC -sV (ip de la maquina que queremos analizar)
+
+
+Ejemplo de comando para analisis mas detallado
+nmap -e eth0 -sS -sV 10.0.2.4
+
+-sC: Performs a script scan using the default set of scripts. It is equivalent to --
+script=default.
+-sV: Version detection
+
+Si agregamos el parametro -p 0-1000 Le estamos diciendo el rango de puertos que queremos que escanee(en este caso del 0 al 1000)
+O si queremos puertos especificos debemos poner -p y los numeros de puertos que queramos separados por ","  -p 22,23,80 
+Ej: nmap -p 22,23 10.0.2.4 
+
+Para exportar dicha información que recojemos con los distintos scaneos, se pueden usar estos parametros
+-oN/-oX/-oS/-oG <file>: Output scan in normal, XML, s|<rIpt kIddi3,
+Ejemplo:
+nmap -e eth0 -sS -sV 10.0.2.4 -oG ./nombredelfichero 
+
+Para analisis de deteccion de sistema Operativo, podemos usar el parametro -O
+
+Nmap tambien cuenta con scripts que se pueden encontrar en nmap.org/nsedoc
+Que nos van a realizar el analisis de posibles fallos de seguridad o vulnerabilidades en la maquina.
+Ejemplo de comando: 
+nmap -e eth0 -sS -sV -O --script=exploit 10.0.2.4 
+
+
+PARÁMETROS RELACIONADOS CON EL TIPO DE ESCANEO
+
+• -sT: realiza un escaneo de puertos mediante el método TCP CONNECT.
+• 
+• -sS: realiza un escaneo de puertos mediante el método TCP SYN.
+• 
+• -sN: realiza un escaneo de puertos mediante el método TCP Null.
+• 
+• -sF: realiza un escaneo de puertos mediante el método TCP FIN.
+• 
+• -sA: realiza un escaneo de puertos mediante el método TCP ACK.
+• 
+• -sU: realiza un escaneo de puertos mediante el método UDP.
+• 
+• -p: indica a nmap que utilice el rango de puertos que le indiquemos. Por ejemplo, -p 1-20000 hará que compruebe ese rango de puertos indicado (existen desde el 0 al 65535).
+ 
+
+PARÁMETROS PARA OBTENCIÓN DE INFORMACIÓN DEL SERVICIO EN FUNCIONAMIENTO
+• 
+• -sV: comprobará el banner del puerto abierto.
+• 
+• --version-all: este parámetro debe de ir junto a sV y se asegura de comprobar todos los servicios que conoce Nmap para comprobar qué servicio y versión ofrece el puerto abierto.
+• 
+ PARÁMETROS PARA OBTENCIÓN DE INFORMACIÓN DEL SISTEMA OPERATIVO
+• 
+• -O: indica a Nmap que busque la firma del sistema operativo, para poder obtener qué SO usa nuestro objetivo.
+• 
+• --osscan-guess: este parámetro debe de ir junto a –O, ya que indica hacer un análisis más completo del SO.
+• 
+ PARÁMETROS PARA EVASIÓN DE DETECCIÓN
+• 
+• -f: este parámetro fragmenta la petición que hace Nmap para descubrir si el puerto está abierto, por lo que hará que la detección de nuestro análisis de vulnerabilidades sea mucho más difícil.
+• 
+• -mtu: funciona con el parámetro -f, y es que aquí es donde indicaremos en qué tamaño queremos fragmentar la petición. Debe ser en fragmentos de 8 bits. Por ejemplo, –mtu=16 lo fragmenta en trozos de 16 bits.
+• 
+• -Pn: evita hacer ping al objetivo para comprobar si está o no on-line, y es que el ping en ocasiones nos dará problemas para analizar a nuestro objetivo (es importante saber que tratará las máquinas como activas, lo estén o no).
+• 
+• -n: evita realizar una resolución DNS directa/reversa.
+• 
+• -D direcciónIP: emitirá paquetes que suplanten la dirección IP desde donde se origina el análisis de puertos, realizando una suplantación de identidad.
+• 
+• -Tx (del 0 al 5): establece el tiempo de espera entre conexiones a cada uno de los puertos (más alto = más rápido).
+• 
+ PARÁMETROS PARA TRATADO DE INFORMACIÓN
+• 
+• -v: “verbose” indica a la aplicación que nos devuelva más información de la que presenta normalmente, cuantos más verbose se pongan, más detallado será el informe de Nmap. Por ejemplo, -vvv nos devuelve un triple verbose.
+• 
+-d: “depuración”, al igual que verbose, indica a Nmap que nos muestre en pantalla las peticiones que realiza para ejecutar su análisis; cuanto más debug pongamos, más información devolverá. Funciona de un modo similar a verbose. Por ejemplo, -ddd nos devuelve mucha información de depuración.
+• 
+• -oX: salvará el resultado de nuestro análisis en formato XML para su posterior importación en otras herramientas (por ejemplo, Metasploit). Por ejemplo, -oX /root/inf/mianalisis.
