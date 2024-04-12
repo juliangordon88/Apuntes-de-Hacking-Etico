@@ -1,0 +1,31 @@
+SQLmap is an open-source tool used in penetration testing to detect and exploit SQL
+injection flaws. SQLmap automates the process of detecting and exploiting SQL
+injection. SQL Injection attacks can take control of databases that utilize SQL.
+
+SQLMap es una herramienta de prueba de penetración de código abierto que automatiza el proceso de detectar y explotar vulnerabilidades de inyección SQL en aplicaciones web
+
+
+Detección de Inyección SQL:
+• SQLMap comienza enviando solicitudes HTTP a la aplicación web y analiza las respuestas para buscar signos de vulnerabilidades de inyección SQL. Examina parámetros de la URL, formularios web y cabeceras HTTP en busca de posibles puntos de inyección.
+ 
+
+Análisis de la Estructura de la Base de Datos:
+
+• Una vez que encuentra un posible vector de inyección, SQLMap intenta determinar la estructura de la base de datos subyacente. Esto incluye la enumeración de tablas, columnas y datos sensibles.
+ 
+Extracción de Datos:
+
+• Después de identificar la estructura de la base de datos, SQLMap puede extraer datos de la base de datos. Puede recuperar información confidencial, como nombres de usuario, contraseñas y otra información sensible almacenada en la base de datos.
+ 
+Explotación de la Inyección SQL:
+
+• SQLMap puede realizar diversas acciones dependiendo de la naturaleza de la vulnerabilidad encontrada. Puede realizar inyecciones SQL ciegas, de tiempo basado, o incluso ejecutar comandos del sistema operativo a través de la inyección SQL.
+ 
+Soporte para Varios Sistemas de Gestión de Bases de Datos:
+
+• SQLMap es compatible con una variedad de sistemas de gestión de bases de datos, como MySQL, PostgreSQL, Microsoft SQL Server, y otros. Puede ajustar automáticamente sus técnicas de explotación en función del tipo de base de datos detectado.
+ 
+
+Ejemplo de como se puede usar :
+sqlmap -u 'http://10.129.95.174/dashboard.php?search=any+query' --cookie="PHPSESSID=8i9gvkd5mbe3hdqb0vbdps0b5b"
+
