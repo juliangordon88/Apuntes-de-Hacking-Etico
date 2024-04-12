@@ -1,0 +1,10 @@
+Websploit es un framework que está diseñado para identificar debilidades y vulnerabilidades en sitios web y aplicaciones web, permitiendo a los profesionales de seguridad evaluar y mejorar la seguridad de estos sistemas. Websploit ofrece módulos y funcionalidades específicas para tareas como el escaneo de vulnerabilidades, la explotación de debilidades y la auditoría de aplicaciones web.
+
+Comandos:
+help(lista los comandos posibles)
+show (mostrará los modulos que tiene incluido websploit) 
+use + "nombre del modulo" (para utilizar el modulo que queramos) 
+options (cojera las opciones disponibles en el modulo)
+set ip (cambiamos el rango que queremos de nuestra red) 
+execute (en este caso elegimos el modulo scan_network y le pusimos el rango de red que queremos con "set ip" , entonces ejecutará el escaneo de red sobre el rango de ips que le pasamos)  
+back para salir del modulo que elegimos anteriormente
