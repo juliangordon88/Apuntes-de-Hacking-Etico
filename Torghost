@@ -1,0 +1,21 @@
+Torghost es un script que redirecciona todo nuestro tráfico a través de la red TOR, independientemente de si estamos usando el navegador, nmap, o cualquier otra herramienta.  
+Características  
+
+-Redirección de todo el tráfico de red hacía la red TOR, es decir, cualquier conexión del equipo que intente conectarse a Internet pasará por ella.
+-No se filtrará ningún ping, lo que protege nuestra identidad.
+-Fuerza a las aplicaciones a pasar por ella, al contrario que proxychain, que es ignorado por algunas aplicaciones que tienden a una conexión más rápida ignorando los proxys.
+-Rechaza peticiones entrantes y salientes que puedan contener información sensible o puedan revelar nuestra IP real.
+-Protección de fuga de DNS, podemos usar un DNS remoto anónimo.
+
+Torghost usage:
+    -s    --start       Start Torghost
+    -r    --switch      Request new tor exit node
+    -x    --stop        Stop Torghost
+    -h    --help        print(this help and exit)
+    -u    --update      check for update
+
+
+Para iniciar torghost usaremos el comando python torghost.py -s, dentro de la carpeta /home/kali/torghost :
+
+──(root㉿kali)-[/home/kali/torghost]
+└─# python torghost.py -x
