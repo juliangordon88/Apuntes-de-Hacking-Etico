@@ -6,3 +6,17 @@ SSL Proxy: 127.0.0.1 port: 8080
 Una vez esté asociado el proxy a Owasp-Zap, todas las peticiones que realizemos, quedarán registradas.
 
 Podemos ver la petición que hemos echo para hacer el login si seleccionamos el metodo POST del lado izquierdo del panel y del lado derecho cliqueamos en Request . 
+
+
+Para empezar a utilizar OWASP-ZAP , primero debemos abrir el firefox, ir a settings, abajo de todo Network settings y configurar : Manual Proxy Configuration
+HTTP Proxy: 127.0.0.1 port: 8080 (donde trabaja por defecto esta herramienta)
+SSL Proxy: 127.0.0.1 port: 8080 
+Una vez esté asociado el proxy a Owasp-Zap, todas las peticiones que realizemos, quedarán registradas. 
+Una vez tenemos configurado nuestro proxy Owasp-zap para que capture todas las peticiones a esta aplicacion web, seleccionamos OS Command Injection y primero probaremos las credenciales bee y bug , que son las que nos dicen en la pagina que son correctas. 
+Podemos ver que Owasp-zap captura esta petición :
+login=bee&password=bug&security_level=0&form=submit
+Luego entramos nos aparece un cuadro que dice NS lookup: 
+Alli escribiremos localhost y nos devolverá esto: 
+Server: 10.254.150.1 Address: 10.254.150.1#53 Non-authoritative answer: 
+Name: localhost Address: 127.0.0.1
+Podemos comprobar en nuestra terminal de kali linux, que si hacemos un nslookup a localhost, nos devolverá lo mismo. 
