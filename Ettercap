@@ -1,0 +1,54 @@
+Ettercap es una herramienta de seguridad informática que se utiliza para realizar ataques de intermediarios en redes. Permite interceptar y analizar el tráfico de red en tiempo real, así como realizar acciones como envenenamiento ARP, captura de contraseñas y análisis de protocolos.
+
+Ettercap funciona mediante la técnica de ataque conocida como "Man-in-the-Middle" (Hombre en el Medio). Aquí está el funcionamiento básico de Ettercap:
+
+Intercepción del tráfico:
+
+Ettercap se sitúa entre dos partes de una comunicación de red, como un cliente y un servidor, interceptando y capturando todo el tráfico que pasa entre ellos.
+Envenenamiento ARP:
+
+Ettercap utiliza el envenenamiento ARP para engañar a las máquinas en la red haciéndoles creer que la dirección MAC del atacante es la dirección MAC del enrutador (puerta de enlace) o de otra máquina en la red. Esto permite al atacante interceptar y redirigir el tráfico destinado a esas máquinas.
+Análisis y manipulación del tráfico:
+
+Una vez que Ettercap ha interceptado el tráfico, puede analizarlo y realizar diversas acciones, como la captura de contraseñas, la modificación de datos transmitidos o la inyección de paquetes maliciosos.
+Interfaz gráfica de usuario (GUI):
+
+Ettercap proporciona una interfaz gráfica de usuario (GUI) que facilita la configuración de los ataques y la visualización del tráfico de red en tiempo real. Esto permite a los usuarios interactuar con la herramienta de manera más intuitiva y eficiente.
+
+Uso de Ettercap.
+Lo primero que debemos hacer es poner nuestro Kali en modo forwarding, para eso usamos el comando: 
+echo 1 > /proc/sys/net/ipv4/ip_forward
+
+El comando echo 1 > /proc/sys/net/ipv4/ip_forward se utiliza para habilitar el reenvío de paquetes IP en el sistema operativo Linux. Es importante habilitar el reenvío de paquetes IP antes de ejecutar Ettercap, ya que Ettercap necesita interceptar y reenviar paquetes entre las máquinas en la red. Sin el reenvío de paquetes habilitado, Ettercap no podrá funcionar correctamente y no podrá realizar ataques de intermediarios como el envenenamiento ARP y el análisis de tráfico.
+
+Lo segundo que debemos hacer es abrir y modificar el archivo etter.conf  . Para ello hacemos un : 
+nano /etc/ettercap/etter.conf  
+
+Modificamos el Primer bloque que dice ' privs ' y lo dejamos en 0 las 2 opciones. 
+[privs]
+ec_uid = 0                # nobody is the default
+ec_gid = 0                # nobody is the default
+
+Kali linux tiene instaladas las iptables, para habilitarlas descomentamos esto: 
+#---------------
+#     Linux 
+#---------------
+
+   redir_command_on = "iptables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"
+   redir_command_off = "iptables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"
+
+# pendant for IPv6 - Note that you need iptables v1.4.16 or newer to use IPv6 redirect
+   redir6_command_on = "ip6tables -t nat -A PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"
+   redir6_command_off = "ip6tables -t nat -D PREROUTING -i %iface -p tcp -d %destination --dport %port -j REDIRECT --to-port %rport"
+
+Una vez configurado, abrimos la interfaz grafica de ettercap y vamos al menu, y en hosts, hacemos un scaneo de hosts. 
+Pondremos la puerta de enlace (10.0.2.1) en target 1 , y en target 2 la ip de la maquina de Windows 10 (10.0.2.12)
+
+Echo esto, vamos a la pestaña de Ataques y elegimos ARP poisoning y le damos ok. 
+
+En la pestaña plug ins podemos activar dandole 2 clicks a por ejemplo 'chk_poison' para ver si tuvo exito el ARP spoofing. 
+
+O si el mensaje tiene algun tipo de cifrado, podemos usar sslstrip 
+
+
+
