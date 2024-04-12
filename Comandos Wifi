@@ -1,0 +1,48 @@
+para buscar wifis:
+nmcli device wifi list
+
+Para conectar :
+sudo nmcli device wifi connect MasterD password 8108108108
+
+
+┌──(root㉿kali)-[/home/kali]
+└─# airmon-ng start wlan0           
+
+Found 2 processes that could cause trouble.
+Kill them using 'airmon-ng check kill' before putting
+the card in monitor mode, they will interfere by changing channels
+and sometimes putting the interface back in managed mode
+
+    PID Name
+    605 NetworkManager
+   1731 wpa_supplicant
+
+PHY     Interface       Driver          Chipset
+
+phy0    wlan0           rtl88x2bu       TP-Link 802.11ac NIC
+                (monitor mode enabled)
+
+                                                                                                                                                                                             
+┌──(root㉿kali)-[/home/kali]
+└─# iwconfig
+lo        no wireless extensions.
+
+eth0      no wireless extensions.
+
+eth1      no wireless extensions.
+
+docker0   no wireless extensions.
+
+wlan0     IEEE 802.11AC  ESSID:"MasterD"  Nickname:"<WIFI@REALTEK>"
+          Mode:Monitor  Frequency:5.22 GHz  Access Point: D4:76:A0:3D:25:C0   
+          Sensitivity:0/0  
+          Retry:off   RTS thr:off   Fragment thr:off
+          Encryption key:off
+          Power Management:off
+          Link Quality=99/100  Signal level=56/100  Noise level=0/100
+          Rx invalid nwid:0  Rx invalid crypt:0  Rx invalid frag:0
+          Tx excessive retries:0  Invalid misc:0   Missed beacon:0
+
+                                                                                                                                                                                             
+┌──(root㉿kali)-[/home/kali]
+└─# airodump-ng wlan0   
