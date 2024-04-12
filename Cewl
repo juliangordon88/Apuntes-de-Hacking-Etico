@@ -1,0 +1,31 @@
+CeWL funciona de otro modo, ya que nos permite crear el diccionario a partir de websites que le indiquemos, pudiendo usarlo en entornos como la página web de la empresa a auditar, el perfil de blogspot de alguno de sus trabajadores, etcétera.
+
+Por lo que CeWL se trata de una potente herramienta con la que podremos trabajar recopilando las palabras que le indiquemos.
+
+• -d Permite indicar cuantos subdominios puede inspeccionar, por defecto viene dos subdominios. http://DOMINIO/SUB1/SUB2
+• 
+• -m Indica a Cewl cuantas letras debe de tener como mínimo las palabras que añadiremos a nuestro diccionario. Por defecto viene para trabajar con palabras con 3 letras como mínimo.
+• 
+• -o Permite que además de comprobar en el dominio principal se vaya a sitios externos del dominio que aparezcan en la búsqueda.
+• 
+• -w Pasar el contenido de toda la búsqueda a un fichero.
+• 
+• -a Incluir metadatos.
+• 
+• -e Incluir direcciones de e-mail encontradas.
+• 
+• -v Modo “verbose”, muestra más información en el proceso de búsqueda de CeWL.
+• 
+
+En el caso de querer recabar palabras de 6 letras en adelante, metadatos y direcciones de correo de un website, la sentencia de CeWL sería la siguiente:
+Ejemplo de comando:
+
+
+
+
+
+ 
+cewl -m 6 -a -e -v -w nombrearchivotxt http://192.168.1.36
+
+para ordenar podemos usar el parametro |sort -u 
+para contar cuantas palabras tiene el fichero usamos wc
