@@ -1,0 +1,16 @@
+Netdiscover es una herramienta de código abierto diseñada para descubrir dispositivos activos en una red local (LAN). Su función principal es identificar y mapear direcciones IP y direcciones MAC de los dispositivos que están conectados a la misma red. 
+Netdiscover opera enviando ARP (Address Resolution Protocol) requests a través de la red local para mapear direcciones IP y MAC. Al recibir respuestas ARP de los dispositivos activos en la red, Netdiscover recopila esta información y la presenta en una lista, permitiéndote ver qué dispositivos están activos en la red y sus respectivas direcciones MAC e IP.
+
+Comandos
+Descubrir dispositivos en una interfaz especifica:
+netdiscover -i [interfaz]
+
+ejemplo:
+netdiscover -i eth0 -r 10.0.2.4/24
+
+Descubrir dispositivos en una red especifica: ejemplo (192.168.1.0/24)
+netdiscover -r [rango_de_ip] 
+
+Para ver los resultados en un formato legible puedes utilizar la opción -P 
+
+para redirigir los resultados a un archivo (de texto por ejemplo) utilizamos > 
