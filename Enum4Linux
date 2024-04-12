@@ -1,0 +1,19 @@
+Enum4linux es una herramienta de código abierto diseñada para ayudar en la enumeración de información sobre sistemas Windows durante las pruebas de penetración o evaluaciones de seguridad. Su objetivo principal es recopilar información sobre recursos compartidos, usuarios y grupos en servidores Windows.
+
+Ejecución básica: Una vez instalado, puedes ejecutar Enum4linux contra una dirección IP o nombre de host para obtener información sobre el sistema Windows. Por ejemplo:  
+enum4linux <dirección_IP>  
+
+
+Opciones adicionales: Enum4linux tiene varias opciones que te permiten personalizar la enumeración. Algunas de las opciones más comunes son:
+
+• -a: Realiza una enumeración completa.
+• -u <usuario>: Especifica un usuario para la enumeración.
+• -p <contraseña>: Especifica una contraseña para la enumeración.
+• -g: Enumera grupos.
+• -d: Enumera recursos compartidos.
+
+Puedes combinar estas opciones según tus necesidades. Por ejemplo:
+  enum4linux -a -u <usuario> -p <contraseña> <dirección_IP>  
+
+Ejemplo:
+enum4linux -u perdicion -p KingSnake -a 10.0.2.5
