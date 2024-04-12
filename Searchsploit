@@ -1,0 +1,19 @@
+Más que un analizador de vulnerabilidades, Searchsploit consiste en una enciclopedia de exploits. Funciona como exploit-db: simplemente tenemos que incluir qué parámetro deseamos que busque. Puede ser de un sistema operativo, de un servicio o de un tipo de aplicación. De hecho, dichos exploits que lista, los contiene nuestro SO Kali Linux, preparados para usarlos cuando debamos.  
+
+los exploits de Searchsploit estan almacenados en la ruta /usr/share/exploitdb/exploits/
+
+Ejemplo de comando: 
+searchsploit vsftpd  . Esto nos dirá la ruta en la que estan almacenados los exploits dentro de nuestro ordenador. 
+si le agregamos el parametro -w nos indicará la pagina web en la cual esta el exploit. Ej: www.exploit-db.com
+
+Searchsploit esta actualizando su base de datos continuamente, Se recomienda actualizar 1 vez por semana. Por lo que para que se actualice en nuestro ordenador debemos poner el comando:
+searchsploit -u 
+
+Con el parametro -v aumentamos la información que nos da sobre el exploit 
+
+Luego podemos usar el comando:
+Searchsploit + "exploit conocido"(en este caso eternalblue) Y luego nos dice el path de donde esta almacenado este exploit. Los exploits de Searchsploit estan almacenados en la ruta /usr/share/exploitdb/exploits/ Una vez localizado lo podemos abrir, agregando la ruta total . Por lo que para abrir este exploit deberiamos usar esto: 
+
+cat /usr/share/exploitdb/exploits/windows_x86-64/remote/42030.py
+
+En algunas ocasiones Searchsploit nos indicará exploits que tenemos almacenados en Metasploit, serán " .rb ". Hacemos lo mismo, solo cambiamos el path y podemos acceder a ellos. 
