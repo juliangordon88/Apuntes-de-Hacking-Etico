@@ -1,0 +1,80 @@
+pwd (print workind directory) =. Nos muestra donde estamos
+
+cd (Change directory) 
+
+ls (list) = Nos muestra los archivos que tenemos en la carpeta que estamos, o la carpeta que queramos ver con la ruta que le digamos /
+
+ls -la = muestra todos los archivos, incluidos los ocultos 
+
+mkdir (make directory ) = crear una nueva carpeta
+
+rmdir (remove directory) = eliminar carpeta 
+
+cp (copy) = sirve para copiar el archivo que queramos en el destino que queramos. Ejemplo: cp archivo.txt Desktop/
+
+rm (remove) = Sirve para remover/eliminar el archivo en la carpeta que estamos o en la que queramos, pasandole la ruta 
+
+mv (move) = sirve para mover un archivo a la carpeta que queramos 
+
+echo = Se puede usar para crear un archivo txt por ejemplo si usamos el comando echo "hello" > hello.txt. Estamos creando un archivo txt. El simbolo > redirecciona la salida a donde queramos. Pero si solo usamos un simbolo > lo sobreescribe. Si queremos agregar algo al archivo que ya existe debemos usar >> . 
+
+cat = permite crear, fusionar o imprimir archivos en la pantalla de salida estándar o en otro archivo. 
+
+Touch = Similar a cat, sirve para crear archivos. 
+
+Nano = Es un editor de texto
+
+Gedit = Similar pero mas parecido a VScode
+
+Find = nos permite encontrar archivos y directorios. find -name: busca ficheros que coincidan con el nombre proporcionado. -type: f - fichero, d – directorio. size: busca por tamaño.  
+
+locate = mostrar donde esta el archivo que le pasemos. Ejemplo: locate archivo.txt . Nos devolverá la ruta del archivo. Ej: /root/archivo.txt
+
+wc = Cuenta líneas, caracteres y palabras contenidas en un fichero. Parametros wc -c "nombredelfichero" (cuenta byes) -m (cuenta caracteres) -l (cuenta lineas) -w(cuenta palabras)
+
+tr =es un filtro que permite reemplazar o eliminar caracteres de la entrada estándar o archivo.  tr -s: sustituye toda secuencia de un carácter repetido con una única ocurrencia del carácter especificado. -d: elimina el carácter especificado.
+
+• 
+updatedb (updatedatabase) = Para actualizar la base de datos. Por ejemplo si recien creamos un archivo en una carpeta, usamos updatedb para que lo encuentre. 
+
+passwd = para cambiar el password del usuario 
+
+man (manual) = Nos muestra el manual del comando.  Ej: man ls . Nos devolverá el manual del comando ls. 
+
+Cuando vemos una lista de lo que hay en una carpeta, con el comando ls -la nos muestra algunos que empiezan con la letra d que se refiere a un directorio y si empieza con - se refiere a un archivo. Lo mismo azul directorio y blanco archivo. 
+
+chmod (change mode) = Sirve para cambiar los permisos de un archivo. Los permisos pueden ser r(read), w(write), x(execute). Para usar este comando debemos especificar los permisos que queremos darle con numeros. Esos numeros van del 1 al 7, donde 7 es el maximo de permisos posibles y 1 el minimo. El primer numero es para el propietario del archivo o carpeta, el segundo para el grupo de usuarios del archivo ó carpeta y el tercero es todos los permisos.  Ej: chmod 777 archivo.txt , le dariamos el maximo de permisos. Ej: chmod +x archivo.txt , le dariamos permiso de ejecucion al archivo . 
+
+adduser = Se usa para crear un usuario nuevo. Ej: adduser bob . Luego se debe crear password
+
+cat = se usa para abrir/ejecutar archivos 
+
+cat /etc/passwd = Nos dará información importante sobre los usuarios que hay en el ordenador, además del root.
+
+cat /etc/shadow = Nos muestra los hash de los usuarios que tenemos. Esto combinado con el archivo passwd se puede llegar a craquear con otras aplicaciones y así obtener las contraseñas de los usuarios. 
+
+su(switch user) = sirve para cambiar de usuario que se esta usando. 
+
+ifconfig = da información de nuestra ipv4 y ipv6 mascara de red, broadcast. 
+
+ip route = para saber la ip de nuestro gateway
+
+iwconfig = da información de la wireless, si la tenemos
+
+ping = herramienta de diagnostico que permite hacer una verificacion del estado de una determinada conexion o host local. Ej: ping 10.0.2.15 . Nos devolverá el estado de conexion a esa ip sin parar, hasta que le digamos que pare. Si agregamos -c 1 por ejemplo, solamente hará una vez el comando ping.
+
+arp -a = Asocia el numero de IP con una dirección mac. La ip es la dirección logica, y la mac es la dirección fisica. 
+
+netstat -ano = Muestra todos los puertos que estan abiertos y te muestra lo que esta conectado a esos puertos. 
+
+route = permite visualizar y manipular las tablas de enrutamiento de nuestro sistema 
+
+history = Sirve para ver los comandos que utilizaste ultimamente. Se le puede agregar el grep para buscar especificamente. Ejemplo: history | grep ping. Devolveria el historial de las veces que se uso el comando Ping. 
+
+grep = se usa como filtra para la información que queremos. Ejemplo: history | grep ping. Devolveria el historial de las veces que se uso el comando Ping.
+
+apt update && apt upgrade = Sirve para actualizar tu maquina
+
+cut = El comando cut sirve para cortar parte de información que no queremos . Con el parametro -d (significa delimitador) + " " , estamos delimitando lo que que queremos que corte por espacios vacios. Si le agregamos el parametro -f (field) y un numeroX, Eliminara todo lo que este despues de esos X espacios vacios.
+Ejemplo: cat ip.txt | grep "64 bytes" | cut -d " " -f 4. 
+Aqui nos devolvería el IP que tenemos en el archivo ip.txt , pero con ":" al final y lo que queremos es solamente el numero de ip sin los ":". Para quitar esos ":" podemos usar el comando tr -d "lo que queramos borrar" , en este caso ":"
