@@ -1,0 +1,34 @@
+Curl  Sirve para intentar detectar que sistema operativo se esta usando en la maquina objetivo. Permite enviar una petición HTTP a una URL y recibir el resultado  
+Comando: 
+curl -I http://10.0.2.4 (en este caso es el ip de nuestra maquina de metasploitable)
+Nos devolverá :
+
+HTTP/1.1 200 OK
+Date: Mon, 23 Oct 2023 09:32:32 GMT
+Server: Apache/2.2.8 (Ubuntu) DAV/2
+X-Powered-By: PHP/5.2.4-2ubuntu5.10
+Content-Type: text/html
+
+Por lo que podemos intuir que usa un sistema Linux
+Su nombre completo es "Client URL", lo que sugiere su propósito principal: permitir que un usuario haga solicitudes y reciba respuestas de recursos disponibles en Internet utilizando URL.
+Funcionamiento de Curl:
+Solicitud de URL: El usuario proporciona una URL como argumento al comando curl en la línea de comandos.
+Envío de solicitud: Curl crea una solicitud HTTP (u otro protocolo según sea necesario) basada en los parámetros proporcionados por el usuario y envía esta solicitud al servidor correspondiente.
+
+Espera de respuesta: Curl espera a que el servidor responda con los datos solicitados.
+
+Recepción de datos: Una vez que el servidor responde, Curl recibe los datos y los muestra en la salida estándar o los guarda en un archivo, dependiendo de la configuración del usuario.
+
+Finalización de la solicitud: Curl finaliza la conexión con el servidor.
+Usos comunes de Curl:
+Transferencia de archivos: Puedes usar Curl para descargar o subir archivos desde o hacia servidores FTP o SCP/SFTP.
+
+Pruebas de APIs web: Curl es muy útil para realizar pruebas rápidas a APIs web. Puedes enviar solicitudes HTTP GET, POST, PUT, DELETE, etc., y ver las respuestas directamente en la línea de comandos.
+
+Automatización de tareas: Puedes utilizar Curl en scripts de shell o en secuencias de comandos para automatizar tareas de transferencia de datos o pruebas de red.
+
+Depuración y diagnóstico: Curl es una herramienta valiosa para diagnosticar problemas de red o para verificar la disponibilidad de un recurso en un servidor remoto.
+
+Descarga de contenido web: Puedes utilizar Curl para descargar páginas web completas o parte de su contenido, ya sea para análisis o para su posterior procesamiento.
+
+En resumen, Curl es una herramienta poderosa y versátil que proporciona capacidades de transferencia de datos desde y hacia una amplia gama de protocolos de red, lo que la hace útil en una variedad de escenarios, desde la automatización de tareas hasta pruebas de red y desarrollo web.
