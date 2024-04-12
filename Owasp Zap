@@ -1,0 +1,8 @@
+OWASP ZAP (Zed Attack Proxy) es una herramienta de código abierto utilizada para encontrar y remediar vulnerabilidades de seguridad en aplicaciones web. Funciona como un proxy intermedio que permite a los usuarios interceptar y modificar las solicitudes y respuestas entre su navegador y la aplicación web objetivo. ZAP analiza el tráfico web en busca de posibles vulnerabilidades, como inyecciones SQL, ataques de cross-site scripting (XSS), y otros problemas de seguridad comunes. Además, ZAP proporciona informes detallados sobre las vulnerabilidades encontradas, lo que permite a los desarrolladores y administradores de seguridad abordar y solucionar los problemas de seguridad de manera efectiva en sus aplicaciones web.
+
+Para empezar a utilizar OWASP-ZAP , primero debemos abrir el firefox, ir a settings, abajo de todo Network settings y configurar : Manual Proxy Configuration
+HTTP Proxy: 127.0.0.1 port: 8080 (donde trabaja por defecto esta herramienta)
+SSL Proxy: 127.0.0.1 port: 8080
+Una vez esté asociado el proxy a Owasp-Zap, todas las peticiones que realizemos, quedarán registradas.
+
+Podemos ver la petición que hemos echo para hacer el login si seleccionamos el metodo POST del lado izquierdo del panel y del lado derecho cliqueamos en Request . 
