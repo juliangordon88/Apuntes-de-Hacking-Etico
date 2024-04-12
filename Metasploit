@@ -1,0 +1,64 @@
+Metasploit consiste en un framework que engloba diversas herramientas que pueden servir tanto para la labor de análisis (que veremos ahora), como de explotación de vulnerabilidades. Pero lo que más remarca de metasploit es el hecho de que se puede integrar a sus módulos de análisis los motores de aplicaciones anteriormente vistas, como son Nmap y Nessus, para realizar las labores de análisis del objetivo.  
+
+Metasploit es una herramienta de pruebas de penetración que utiliza módulos para realizar diversas tareas. Los módulos en Metasploit están organizados en diferentes categorías. Aunque la estructura puede cambiar con actualizaciones, aquí tienes algunas categorías comunes de módulos en Metasploit:
+
+Exploits:
+Módulos que contienen código para aprovechar vulnerabilidades en sistemas específicos, son los que comprometerán la seguridad de un sistema, los podremos localizar usando la cláusula type:exploit.  Todo exploit debe ejecutarse con un payload, una vez seleccionado el exploit que queremos ejecutar, mediante show payloads, veremos todos aquellos payloads que podemos seleccionar.  
+Seleccionaremos el payload usando set payload seguido del nombre del payload:   Y completaremos todos los parámetros necesarios, tanto del exploit como del payload:  
+Cuando esté todo completado ejecutaremos la instrucción exploit.
+
+Si no definimos ningún payload para un exploit, metasploit asigna uno por defecto, normalmente el genérico.  
+
+
+
+Auxiliary:
+Módulos que no son exploits directos pero realizan tareas complementarias, como escaneo, enumeración o recopilación de información. 
+Los auxiliares (auxiliary) suelen utilizarse para la recolección de información de un objetivo o incluso para realizar conexiones. Al realizar una búsqueda, si usamos la cláusula type:auxiliary.  Para utilizar un auxiliar, escribiremos use seguido del nombre del auxiliar.  Y para ejecutar el auxiliar, escribiremos run.  
+  
+Post:
+Módulos que se ejecutan después de haber comprometido con éxito un sistema. Pueden utilizarse para tareas de post-explotación, como la recopilación de datos o el mantenimiento del acceso, ó bien para obtener más información, hacer movimientos laterales, escalada de privilegios…Los localizaremos con type:post.Como los otros dos módulos, para seleccionarlo, escribiremos use, seguido del nombre del post, y para ver los parámetros options o show options.  En este caso, ya que son módulos de post explotación, deberemos indicar la sesión con la que hemos conseguido el acceso a la máquina comprometida.  
+  
+
+Tipos de Payloads:
+Contienen el código que se ejecutará después de que un exploit tenga éxito. Los payloads pueden ser de diversos tipos, desde shells reversas hasta inyecciones de código.
+SINGLES: Los singles son payloads únicos y completamente independientes. Un payload single puede ser algo tan simple como agregar un usuario al sistema de destino o ejecutar calc.exe. Este tipo de payloads son autónomos, por lo que pueden usarse sin manejadores de payload cómo metasploit, por ejemplo, con netcat.  
+
+STAGERS: Los Stagers configuran una conexión de red entre el atacante y la víctima y están diseñados para ser pequeños y confiables. Es difícil hacer ambas cosas bien siempre, por lo que el resultado es varios stagers similares. Metasploit usará el mejor cuando sea posible y recurrirá a uno menos preferido cuando sea necesario.  
+
+STAGES:  Los Stages son componentes de los payloads, que se descargan por los módulos Stagers. Las diversas variedades de payloads proporcionan funciones avanzadas sin límites de tamaño, cómo Meterpreter, Inyección VNC o iPhone 'ipwn' Shell.  
+
+En resumen, la principal diferencia radica en la presencia o ausencia de una fase inicial más ligera (stager) en el proceso de entrega. La elección entre stagers y stagerless depende de los requisitos específicos de la situación y las medidas de seguridad que puedan estar en su lugar en el entorno objetivo.
+
+Encoders:
+• Módulos que se utilizan para codificar o cifrar payloads con el fin de evadir la detección de antivirus.
+NOP Generators:
+Módulos que generan instrucciones NOP (No Operation) utilizadas en exploits para la realización de ciertos ataques.
+Nops:
+• Módulos que proporcionan secuencias de instrucciones NOP.
+Evasion: 
+• Módulos diseñados para evadir la detección de sistemas de seguridad, como firewalls o sistemas de detección de intrusiones (IDS/IPS).
+Scanners:
+• Módulos que realizan escaneo de vulnerabilidades en busca de sistemas o servicios específicos.
+
+
+
+INICIO DE METASPLOIT
+Metasploit puede utilizar una base de datos para ir almacenando todas las evidencias que vayamos detectando; dicha base de datos está desarrollada en postgresql; por lo que, si queremos utilizarla, lo primero que deberemos hacer será iniciar el servicio:
+
+
+
+
+
+
+
+
+
+
+
+
+
+sudo service postgresql start
+
+Iniciaremos ahora la base de datos:
+
+sudo msfdb init
