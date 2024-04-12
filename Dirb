@@ -1,0 +1,8 @@
+Dirb es una herramienta de enumeración de directorios y archivos. Se utiliza principalmente para buscar directorios y archivos en servidores web. Funciona enviando peticiones HTTP a un servidor y analizando las respuestas para determinar si ciertos directorios o archivos existen.
+
+En resumen, dirb sirve para descubrir recursos ocultos en servidores web que podrían ser vulnerables o que contienen información sensible que no debería ser accesible públicamente.
+
+Ejemplo de uso: 
+dirb http://example.com/  
+
+Este comando realizará un escaneo en el servidor web en http://example.com/  y buscará directorios y archivos comunes. Luego mostrará los resultados, indicando los directorios y archivos que se encontraron.
