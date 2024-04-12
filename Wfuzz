@@ -1,0 +1,62 @@
+Wfuzz es una herramienta de prueba de penetración que se utiliza para realizar ataques de fuerza bruta contra aplicaciones web. Permite automatizar el proceso de encontrar vulnerabilidades al enviar solicitudes HTTP con diferentes combinaciones de parámetros y valores para identificar posibles puntos débiles en una aplicación web.
+
+Wfuzz es extremadamente versátil y puede utilizarse para diversas pruebas de seguridad, incluyendo la identificación de directorios y archivos ocultos, la enumeración de nombres de usuario y contraseñas, la explotación de inyecciones de SQL y mucho más.
+
+Ejemplo básico de cómo usar Wfuzz para buscar directorios ocultos en un servidor web:
+wfuzz -c -z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 404 http://example.com/FUZZ
+
+-c: Muestra solo las respuestas con código de estado correcto.
+-z file,/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt: Utiliza un archivo de palabras clave (en este caso, directory-list-2.3-medium.txt) como lista de posibles directorios.
+--hc 404: Ignora las respuestas con código de estado 404 (página no encontrada).
+http://example.com/FUZZ: Especifica la URL objetivo, donde "FUZZ" será sustituido por las palabras clave del archivo de palabras clave.
+
+Otro ejemplo de uso: 
+
+wfuzz -c -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt http://10.0.2.14/FUZZ
+
+Esta herramienta nos permite descartar distintos resultados que nos devuelva para refinar nuestra búsqueda y que sea mas precisa. Para descartar podemos usar distintos parametros como, las respuestas 404 que no existen ó las respuestas que tengan XX líneas, o XX palabras o XX caracteres.
+
+Un ejemplo de esto es que si una aplicación web (para las respuestas de que esta ruta no existe) se personaliza(customiza) su fallo 404 y por eso nos pueden dar falsos positivos a la hora de realizar la busqueda. Entonces si esa respuesta 404 personalizada tiene XX palabras, pues esas XX las descartamos.
+
+lanzamos primero este comando: 
+wfuzz -c -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt --hw=39 http://10.0.2.14/FUZZ
+
+Nos devuelve algo similiar a esto: 
+
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+=====================================================================
+
+000000021:   404        9 L      39 W       366 Ch      "css"                                                                                                                       
+000000020:   404        9 L      39 W       373 Ch      "wp-content"                                                                                                                
+000000019:   404        9 L      39 W       368 Ch      "media"                                                                                                                     
+000000018:   404        9 L      39 W       374 Ch      "wp-includes"                                                                                                               
+000000017:   404        9 L      39 W       369 Ch      "xmlrpc"                                                                                                                    
+000000014:   404        9 L      39 W       369 Ch      "themes"                                                                                                                    
+000000016:   200        1 L      2 W        45 Ch       "index"         
+
+Verificamos que el codigo 404 siempre devuelve 39 palabras, por lo tanto refinaremos la búsqueda, agregando el parametro ' --hw=39' . 
+Así:
+wfuzz -c -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt --hw=39 http://10.0.2.14/FUZZ
+Devolverá una búsqueda mas precisa, descartanto falsos positivos: 
+=====================================================================
+ID           Response   Lines    Word       Chars       Payload                                                                                                                     
+=====================================================================
+
+000000007:   403        10 L     37 W       372 Ch      ".html"                                                                                                                     
+000000038:   403        10 L     37 W       371 Ch      ".htm"                                                                                                                      
+000000016:   200        1 L      2 W        45 Ch       "index"                                                                                                                     
+000000070:   200        89 L     377 W      2589 Ch     "INSTALL"                                                                                                                   
+000000400:   200        50 L     58 W       588 Ch      "."                                                                                                                         
+000000467:   301        9 L      35 W       401 Ch      "phpmyadmin"                                                                                                                
+000000589:   403        10 L     37 W       376 Ch      ".htaccess"                                                                                                                 
+000001557:   200        4 L      11 W       200 Ch      "crossdomain"                                                                                                               
+000001558:   301        9 L      35 W       397 Ch      "drupal"                                                                                                                    
+000001539:   200        56 L     354 W      2491 Ch     "README"      
+
+Podemos ver que ya no nos devuelve errores 404 . Ahora acortaremos la búsqueda a 9 lineas y a 37 palabras. de la siguiente manera, agregando el parametro '--hl=9': 
+
+wfuzz -c -w /opt/SecLists/Discovery/Web-Content/raft-small-words.txt --hl=9 --hw=37 http://10.0.2.14/FUZZ
+
+Y nos devolverá un resultado limpio con todas url correctas. Si queremos podemos redireccionar el resultado a un fichero (con > nombrefichero.txt) para presentarlo a un posible cliente.
+
