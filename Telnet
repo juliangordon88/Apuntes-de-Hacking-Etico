@@ -1,0 +1,7 @@
+El Protocolo Telnet (TELNET) proporciona un método estándar para que los dispositivos de terminal y los procesos orientados a terminal intercambien información. Normalmente los programas de emulación de terminal que le permiten iniciar la sesión en un sistema principal remoto utilizan TELNET.  
+Telnet permite el control remoto de los ordenadores por medio de entradas y salidas basadas en texto. Con este objetivo, se crea una conexión cliente-servidor a través del protocolo TCP y del puerto TCP 23, donde el dispositivo controlado ejerce de servidor y espera a los comandos pertinentes
+
+Comando: 
+
+telnet 10.0.2.4 
+Nos conectará a la maquina objetivo a traves del protocolo TCP y del puerto 23 
