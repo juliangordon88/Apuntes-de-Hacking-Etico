@@ -1,0 +1,39 @@
+Burp Suite es una herramienta integral de prueba de seguridad diseñada para evaluar la seguridad de aplicaciones web. 
+Cómo funciona Burp Suite:
+
+Proxy Intercept:
+
+Burp actúa como un proxy entre el navegador y el servidor web. Intercepta las solicitudes y respuestas entre ellos, lo que permite al usuario modificar y analizar el tráfico en tiempo real. Esta característica es valiosa para identificar y modificar datos en tránsito.
+ 
+Spidering:
+
+Burp Suite puede explorar automáticamente una aplicación web (spidering) para descubrir todas las páginas accesibles y sus relaciones. Esto ayuda a mapear la estructura de la aplicación y a identificar posibles puntos de vulnerabilidad.
+
+Escaneo de Seguridad:
+
+Burp Suite puede realizar escaneos de seguridad automatizados para identificar vulnerabilidades comunes, como inyecciones de SQL, cross-site scripting (XSS), entre otros. También permite escaneos manuales para un análisis más detallado.
+ 
+Repetición de Solicitudes:
+
+Permite repetir solicitudes para pruebas de carga o para verificar la repetibilidad de ciertas acciones. Esto es útil para verificar la consistencia de la aplicación y detectar posibles problemas de seguridad.
+
+Inyección de Datos:
+
+Facilita la inyección de datos en solicitudes y respuestas para probar cómo la aplicación responde a diferentes entradas. Esto es crucial para identificar posibles vectores de ataque.
+
+Comparación de Respuestas:
+
+Burp Suite puede comparar respuestas entre dos solicitudes diferentes, ayudando a identificar cambios sutiles que podrían indicar vulnerabilidades o comportamientos inesperados.
+
+Interceptación y Modificación:
+
+Permite interceptar solicitudes y respuestas para modificar datos antes de que lleguen al servidor o al navegador. Esto es útil para probar la seguridad de la entrada de datos.
+
+Herramientas de Extensión:
+
+Burp Suite es extensible mediante el uso de extensiones. Las extensiones permiten agregar funcionalidades personalizadas o integrarse con otras herramientas y servicios.
+
+Generación de Informes:
+
+Proporciona capacidades de generación de informes para documentar hallazgos de seguridad, lo que facilita la comunicación de problemas a los desarrolladores o a otros miembros del equipo de seguridad.
+ En resumen, Burp Suite es una herramienta versátil que combina capacidades de análisis automático y manual para ayudar a los profesionales de seguridad a identificar y corregir vulnerabilidades en aplicaciones web.
