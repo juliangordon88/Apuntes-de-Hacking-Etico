@@ -1,0 +1,17 @@
+Crunch se trata de la primera herramienta que veremos para crear diccionarios. Su funcionamiento es bastante sencillo y básico, haciendo que sea una de las mejores elecciones para usar. Además de ello, crunch permite devolver sus resultados en pantalla, por lo que más adelante se explicará el uso de la combinación de otras herramientas junto a crunch.  
+
+
+Para iniciar crunch tenemos que abrir una terminal de Linux, y escribir el comando crunch seguido de los parámetros que indicaremos a continuación.
+
+• min: El término “min.” se refiere al número mínimo de caracteres que debe generar crunch.
+• 
+• max: Como pasaba con min. Max se refiere al máximo de caracteres que generará crunch.
+• 
+• caracteres a usar: Tendremos que indicar a crunch que caracteres va a utilizar para generar el diccionario.
+• 
+ Ejemplo de comando a usar:
+crunch 3 4 abcdefghijklmnopqrstuvwxyz
+
+Para crear un archivo le agregamos > nombre_del_archivo.txt
+
+Conviene mutar los diccionarios, ya que pueden llegar a ocupar mucho espacio, un simple diccionario de 4 caracteres ya pesa 70 megas.   
