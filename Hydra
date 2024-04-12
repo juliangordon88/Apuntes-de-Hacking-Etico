@@ -1,0 +1,61 @@
+Empezaremos con Hydra, el cual, debido a su amplio abanico de servicios, es una aplicación bastante extendida en el mundo del pentesting. Hydra funciona mediante una serie de parámetros que vamos a explicar, pero cuenta también con un apartado gráfico, que prepara la sentencia de Hydra a medida que vas configurando cada casilla que corresponde a un parámetro.  
+
+Para ejecutar Hydra tenemos que abrir una terminal de Linux y escribir el comando hydra seguido de los parámetros que se dictan.
+
+-l Se indicará a Hydra la información de login de un único usuario.
+
+-L Se indicará a Hydra la información de login de un fichero de texto para varios usuarios.
+
+-p Se indicará a Hydra la información de password de una sola contraseña.
+
+-P Se indicará a Hydra la información de password de un fichero de texto con varias contraseñas.
+
+-t Número de conexiones en paralelo, se recomienda reducir las “16 por defecto” para no causar una denegación de servicio.
+
+-v –V distintos tipos de “verbose” para mostrar más información.
+
+Tras esos parámetros escribiríamos la dirección IP de nuestro objetivo, y el tipo de servicio que se va a atacar.
+  
+Por ejemplo, supongamos que vamos a atacar un servicio ftp tras recopilar la información de usuarios que tiene dicha máquina. Empezaríamos con lo básico, primero, descubrir los usuarios y recopilarlos.  
+
+netdiscover -r 192.168.1.0/24 
+
+nmap -vv -dd -sS -sV -Pn -O -p 1-65535 -f -mtu=16 --version-all --osscan-guess 192.168.1.37
+
+enum4Linux -a 192.168.1.37  ( se utiliza para realizar una enumeración completa de información sobre sistemas Windows y Samba en la máquina. Buscará información detallada sobre usuarios, shares y otras configuraciones relevantes para esos sistemas en la red.)
+
+hydra  -v -V -l user -P /usr/share/wordlists/rockyou.txt -t 4 192.168.1.37 smb
+
+Otro ejemplo de comando podria ser:
+hydra -l admin -p password ftp://10.0.2.15 -v  . Si a este comando le agregamos el -f se detendrá al encontrar un usuario/contraseña. Sirve en el caso de que le pasemos un diccionario muy grande. 
+
+El usuario anonymous es muy comun en servicios ftp, suele ser el que viene por defecto
+
+Ahora utilizaremos Hydra para descubrir logins de usuarios/passwords en paginas web. 
+Para ello debemos abrir la pagina web de nuestro target en nuestro navegador y abrir los developer tools e ir a network. En POST , desde allí encontraremos la petición que hemos realizado, el intento de conexion(probamos el usuario: user y password: pass) . 
+Le damos boton derecho del mouse a Edit and Resend y bajamos a Body. Esto es lo que ha intentado enviar a la pagina web para intentar conectarse
+username=user&password=pass&Login=Login
+Con el metodo POST y a la URL: http://10.0.2.15/dvwa/login.php
+Estas son las 3 cosas que utilizaremos desde Hydra: Cojer la URL ,el metodo y el request body
+
+Probaremos con el siguiente comando: 
+
+hydra -l user -p password 10.0.2.15     http-post-form            "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login"
+{____________________________}     {___________}           {_________________________________________________________}
+esta primer parte es igual                   el metodo utilizado      entre comillas la URL de destino, para separar esta URL de los parametros usaremos : 
+      Para que hydra identifique este user y este password usaremos ^^ y en mayusculas 
+    {___}    {_______}
+De este modo hydra va a sustituir esta parte de user y de password 
+
+Para que hydra identifique un acierto y un error lo hace por la salida. Si miramos en la pagina web al probar user y pass, nos devuelve login failed. Hay 2 maneras:
+Ir por la parte de fallo, que es lo que tenemos en este caso Añadiremos esta parte al final :F=failed  
+O ir por el acierto y pondríamos :S=succesfull (esto podriamos suponer que sería el mensaje que nos devuelva en caso de acierto, ó podría ser Welcome,etc) . 
+Por lo que nuestro comando final quedaría así:
+hydra -l user -p password 10.0.2.15 http-post-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:F=failed" -vV
+
+Si quisieramos usar diccionarios para probar este login, usariamos este comando:
+hydra -L users.txt -P dict.txt 10.0.2.15 http-post-form "/dvwa/login.php:username=^USER^&password=^PASS^&Login=Login:F=failed"
+
+En el caso de que el formato que encontremos sea JSON hay que escapar las comillas con \ . Las usamos detras de las " dentro del cuerpo para que no interprete que se ha cerrado. 
+
+Cojer la URL ,el metodo y el request body
