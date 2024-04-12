@@ -1,0 +1,17 @@
+Shellter es una herramienta de pentesting que se utiliza para inyectar códigos maliciosos en ejecutables de Windows. Su función principal es ocultar un payload de shellcode dentro de archivos ejecutables legítimos para evadir la detección de antivirus. 
+
+Ejecución básica:
+shellter -h
+
+Uso básico:
+shellter -a -l <ruta_del_ejecutable_legitimo> -e <nombre_del_payload_exe>
+-a: Activa el modo automático.
+-l: Especifica la ruta del ejecutable legítimo.
+-e: Especifica el nombre del ejecutable de salida (con el payload inyectado).
+
+shellter -i  Este comando inicia el modo interactivo, donde puedes seleccionar el ejecutable de destino y otras opciones de configuración
+
+Otras opciones:
+
+-r: Restaura un ejecutable previamente infectado.
+-f: Forzar infección incluso si Shellter detecta que el ejecutable ya ha sido infectado.
