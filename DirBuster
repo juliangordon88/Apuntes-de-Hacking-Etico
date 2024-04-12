@@ -1,0 +1,16 @@
+
+DirBuster es una herramienta similar a Dirb que se utiliza para realizar enumeración de directorios y archivos en servidores web. Funciona enviando solicitudes HTTP a un servidor y analizando las respuestas para descubrir recursos ocultos, directorios y archivos que puedan ser accesibles públicamente.
+
+La diferencia principal entre DirBuster y Dirb radica en que DirBuster es más robusto y cuenta con una interfaz gráfica de usuario (GUI) que facilita su uso, especialmente para usuarios menos experimentados.
+
+
+Ejemplo básico de cómo usar DirBuster:
+
+Inicia DirBuster desde la interfaz gráfica de usuario o desde la línea de comandos.  
+Especifica la URL del servidor web que deseas escanear.  
+Selecciona una lista de palabras clave o directorios comunes que quieres utilizar para el escaneo.  
+Inicia el escaneo y DirBuster enviará solicitudes HTTP al servidor, analizará las respuestas y mostrará los resultados.  
+
+Los hilos(threads) cuantos mas hilos, mas vamos a saturar la aplicación web. 
+Podemos buscar ficheros php ó añadir html, js, etc
+Si vemos que encuentra archivos/carpetas que empiezan por '.' son falsos positivos porque indican la misma ruta. 
