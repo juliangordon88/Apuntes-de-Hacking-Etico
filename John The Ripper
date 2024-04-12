@@ -1,0 +1,34 @@
+John the Ripper es una herramienta de criptografía que aplica fuerza bruta para descifrar contraseñas. Es capaz de romper varios algoritmos de cifrado o hash, como DES, SHA-1 y otros.
+
+John the Ripper es capaz de auto-detectar el tipo de cifrado de entre muchos disponibles, y se puede personalizar su algoritmo de prueba de contraseñas. Eso ha hecho que sea uno de los más usados en este campo.
+
+Debido a que muchas veces es capaz de detectar el algoritmo de encriptación asociado, su uso es muy sencillo, basta con pasarle el nombre del fichero que contenga las credenciales:  
+
+Comando:
+
+john [nombre de fichero]
+
+
+También tiene una interfaz grafica que se usa llamando al comando: johnny
+
+Tambien podemos pasarle un diccionario con el comando:
+sudo john --wordlist [nombre del diccionario] [ubicación del archivo a descifrar]
+
+John the Ripper is a free password cracking software tool. Originally developed for the
+Unix operating system, it can run on fifteen different platforms (eleven of which are
+architecture-specific versions of Unix, DOS, Win32, BeOS, and OpenVMS). It is among the
+most frequently used password testing and breaking programs as it combines a number of
+password crackers into one package, autodetects password hash types, and includes a
+customizable cracker. It can be run against various encrypted password formats
+including several crypt password hash types most commonly found on various Unix
+versions (based on DES, MD5, or Blowfish), Kerberos AFS, and Windows NT/2000/XP/2003 LM
+hash. Additional modules have extended its ability to include MD4-based password hashes
+and passwords stored in LDAP, MySQL, and others.
+
+Para obtener las claves de un fichero .zip debemos primero transformar el fichero.zip a una cadena que va a poder leer e interpretar John the Ripper
+usamos el comando:
+zip2john +nombre del fichero > nombre del fichero que queramos
+
+Luego  elegiremos el diccionario que queramos que utilice para descifrar
+
+john --wordlist=/usr/share/wordlists/rockyou.txt
