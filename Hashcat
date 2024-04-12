@@ -1,0 +1,17 @@
+
+Al igual que pasaba con Nessus, se recomienda el uso de Hashcat en la máquina nativa en vez de la máquina virtual debido al uso de CPU y (en el caso de ser compatible) GPU que hace el programa.
+
+La ayuda de hashcat es muy extensa ya que nos indica incluso el tipo de cifrado asociado a cada código de uso. Al final de la ayuda, nos muestra unos ejemplos sencillos:
+Hashcat no trabaja de forma online. Esta aplicación permite descifrar contraseñas que han sido cifradas mediante el algoritmo que le indiquemos. ¿Y cómo será posible identificar dicho algoritmo? Gracias a la combinación de otra mini aplicación que veremos aquí, llamado Hash-Identifier.  
+
+En el hipotético caso de toparnos con unas credenciales cifradas, primero tenemos que identificar qué tipo de cifrado usa. Para ello abriremos una terminal de Linux y escribiremos el comando hash-identifier. Al abrirse la aplicación basta con pegar el cifrado para que nos indique que tipo es.
+
+A continuación, se preparará el fichero con los cifrados que hemos recopilado, y lo pondremos en la carpeta de hashcat de nuestra máquina.  
+
+Basta con abrir el emulador de comandos de Windows e ir a la ruta donde se tenga guardado hashcat. Los parámetros a usar son:  
+hashcat64 -m tipodecifrado rutadecifrados rutadiccionario
+
+Ejemplo de comando:
+Ataque diccionario: hashcat -a 0 -m 1000 passwords.txt dict.txt --force
+Ataque fuerza bruta: hashcat -a 3 -m 1000 passwords.txt
+hashcat -a 0 -m 0 hash /home/kali/SecLists/Passwords/Leaked-Databases/rockyou.txt
