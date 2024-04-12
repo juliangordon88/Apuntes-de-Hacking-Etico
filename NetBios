@@ -1,0 +1,9 @@
+Network Basic Input/Output System" Netbios es otro servicio que se puede utilizar para poder detectar máquinas activas en la red local. Como dicho servicio está en funcionamiento por defecto en los entornos de Microsoft Windows, gracias a este se puede descubrir qué máquinas están activas en la red.   
+Comando:
+nbtscan -v 10.0.2.0/24 
+Nos devolverá las maquinas que estan activas en la red y el grupo de trabajo que estan trabajando 
+
+Al comando nbtscan -v 10.0.2.0/24  se le puede agregar el numero del puerto que deseemos investigar 
+
+Ejemplo de comando:
+nbtscan -v -s -r -h 10.0.2.0/24 
