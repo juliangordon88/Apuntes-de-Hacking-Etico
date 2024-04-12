@@ -1,0 +1,49 @@
+Una vulnerabilidad puede componerse de dos partes:
+
+La primera es un código malicioso, que será el que explote dicha vulnerabilidad y también se le conoce por la palabra exploit (‘aprovecharse de’ en inglés).
+
+La segunda parte recibe el nombre de payload. Un payload es el que ejecuta en ciertos tipos de vulnerabilidades, funciones que desea el atacante: conexiones remotas a una máquina, ejecución de procesos del sistema y aplicaciones maliciosas, tirar la propia máquina, etcétera.
+ 
+Un ejemplo es el Memory Bleed, el cual hace que la memoria vaya agotándose al crear rutinas relacionadas al proceso vulnerable hasta dejar a la máquina sin recursos, lo que provoca un ataque de Denegación de Servicios.  
+
+La gravedad de una vulnerabilidad se ve reflejada por: La gravedad de la incidencia, La repercusión para nuestro cliente y La complejidad para poder llevar a cabo dicha vulnerabilidad.
+Se hará una media de esos tres valores para poder indicar en nuestro informe el valor real de la incidencia.
+
+
+Hay diferentes tipos de exploits, pero a lo largo de este curso van a abarcarse en tres ramas.
+
+Remotos, ya que pueden ejecutarse de forma remota contra nuestro objetivo. 
+Ejecución de código remoto (buffer overflow/heap overflow/integer overflow) en servicio con vulnerabilidad pública.
+• Canal de comunicaciones no seguro.
+• Credenciales por defecto o muy débiles.
+• Mala configuración de autenticación.
+• Acceso a información «sensible».
+• Vulnerabilidad de aplicación web (inyección SQL, RCE, XSS, LFI/RFI…).
+
+Locales, ya que implican tener que ejecutarse dentro de la máquina del objetivo. 
+• Elevación de privilegios del usuario que usa una conexión remota.
+• Recabar información sensible del sistema operativo y aplicaciones instaladas.
+• Propagación de consultas maliciosas contra máquinas de la red local.
+
+Denegación de Servicios, que como indica el nombre, hace que un servicio ofrecido por nuestro objetivo se vea afectado en rendimiento e incluso deje de funcionar hasta que se haya realizado un reinicio de dicho servicio o sistema operativo del objetivo.
+• Ejecución de código remoto (buffer overflow/heap overflow/integer overflow) en servicio con vulnerabilidad pública.
+• Botnets.
+• Peticiones malformadas.
+• Exceso de peticiones sin cerrar conexiones.
+
+Tipos de exploits por origen: 
+
+Server side. Es el tipo de explotación más llamativo y consiste en aprovecharse de una debilidad de una aplicación (o servicio), es accesible de forma directa y no requiere de la intervención de un tercero para poder reproducirla.
+
+Client side. Tiene como objetivo explotar la vulnerabilidad en el lado del cliente, aprovechándose de las debilidades de uno de los eslabones más débiles en la cadena de la seguridad de la información, como es «El usuario final sin formación en este tipo de técnicas».
+
+
+Todo esto debe estar reflejado en el contrato inicial entre cliente y auditor, para que se sepan los riesgos reales de una auditoría basada en pentesting:
+
+• Caídas de servicios.
+• Caídas del sistema.
+• Denegación de servicios.
+• Pérdidas de confidencialidad en datos.
+• Pérdidas de disponibilidad.
+• Exposición de información confidencial.
+• Impactos en la estabilidad del sistema evaluado.
