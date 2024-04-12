@@ -1,0 +1,47 @@
+Para ejecutar la aplicación WPScan debemos escribir wpscan seguido de los parámetros necesarios.  
+
+Escanear un sitio web de WordPress:  
+--url: la URL de nuestro objetivo.
+wpscan --url http://example.com  
+
+Escanear un sitio web de WordPress en modo silencioso:  
+wpscan --url http://example.com --quiet  
+
+Escanear un sitio web de WordPress con un nombre de usuario específico:  
+wpscan --url http://example.com --enumerate u  
+--enumerate: sirve para enumerar más información y funciona mediante los siguientes parámetros que se van a listar.
+u[1-30]: sirve para enumerar los nombres de usuario del website que corresponden al rango del ID 1 al ID 30.
+
+Escanear un sitio web de WordPress para encontrar plugins y temas instalados:  
+p: intenta recabar información de los plugins que están funcionando en el website.
+wpscan --url http://example.com --enumerate p  
+
+Escanear un sitio web de WordPress para encontrar vulnerabilidades conocidas en plugins y temas:  
+vp: muestra solamente los plugins vulnerables del website.
+wpscan --url http://example.com --enumerate vp  
+
+Escanear un sitio web de WordPress y generar un informe en formato JSON:  
+wpscan --url http://example.com --format json -o result.json  
+
+Escanear un sitio web de WordPress utilizando un nombre de usuario y una lista de contraseñas:  
+wpscan --url http://example.com --username admin --passwords wordlist.txt 
+--wordlist RUTA: establece una ruta con un diccionario de contraseñas para atacar el login del website mediante un ataque de diccionario.
+
+Escanear un sitio web de WordPress utilizando un archivo de cookies: 
+--cookie: “contenido”, introduce manualmente la cookie que queremos usar para lanzar el análisis.
+wpscan --url http://example.com --cookie "wordpress_test_cookie=WP+Cookie+check"  
+
+Escanear un sitio web de WordPress en modo de actualización en tiempo real: 
+wpscan --url http://example.com --batch  
+
+
+ap: analiza todos los plugins del website.
+tt: analiza si el website es vulnerable al exploit relacionado con los TimThumbs.
+t: intenta recabar qué theme se ha usado en la website.
+vt: muestra solamente las themes vulnerables.
+at: analiza todos los themes del website.
+--log: creará un fichero con el contenido de todo el análisis realizado por WPScan.
+--usernames RUTA: establece una ruta con un diccionario de nombres de usuario para atacar el login del website mediante un ataque de diccionario.
+-V: establece el modo verbose (reporta más información de cada proceso realizado y sus resultados).
+
+ 
